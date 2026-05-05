@@ -36,6 +36,8 @@
 
 <br/>
 
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/fire.png" alt="divider" width="100%">
+
 ## 🌟 Overview
 
 **ContentCast** is a full-featured content broadcasting system designed for educational institutions. It provides a streamlined three-step workflow that connects teachers, principals, and students through an elegant, real-time content delivery pipeline.
@@ -46,7 +48,7 @@
 | Track submission status | Filter & search content | Auto-rotating content |
 | Dashboard analytics | Institutional overview | No login required |
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png" alt="divider" width="100%">
 
 ## ✨ Key Features
 
@@ -119,7 +121,7 @@
 </tr>
 </table>
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png" alt="divider" width="100%">
 
 ## 🏗️ Architecture & Workflow Pipeline
 
@@ -150,7 +152,7 @@ flowchart LR
     B1 --> B2 --> B3
 ```
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png" alt="divider" width="100%">
 
 ## 🔄 Content Lifecycle
 
@@ -168,7 +170,7 @@ stateDiagram-v2
     Broadcasting --> [*]
 ```
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/vintage.png" alt="divider" width="100%">
 
 ## 📁 Project Structure
 
@@ -254,7 +256,7 @@ content_broadcasting/
         └── 📄 helpers.js              #    Date formatting, validation, etc.
 ```
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/fire.png" alt="divider" width="100%">
 
 ## 🚀 Getting Started
 
@@ -293,7 +295,7 @@ npm run dev
 | `npm run start` | Serve the production build |
 | `npm run lint` | Run ESLint for code quality checks |
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png" alt="divider" width="100%">
 
 ## 🔑 Demo Credentials
 
@@ -323,7 +325,7 @@ npm run dev
 </tr>
 </table>
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="divider" width="100%">
 
 ## 🗺️ Route Map
 
@@ -365,7 +367,7 @@ graph TD
 | `/principal/all-content` | 🔒 Principal | All content with search & filters |
 | `/live/:teacherId` | 🌐 Public | Live broadcast page (no auth) |
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png" alt="divider" width="100%">
 
 ## 🔐 Authentication Flow
 
@@ -395,7 +397,7 @@ sequenceDiagram
     PR-->>U: Render page or redirect
 ```
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png" alt="divider" width="100%">
 
 ## 🛠️ Tech Stack Deep Dive
 
@@ -457,7 +459,7 @@ sequenceDiagram
 </tr>
 </table>
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/vintage.png" alt="divider" width="100%">
 
 ## 🔌 API Service Layer
 
@@ -507,7 +509,7 @@ async getAll(filters = {}) {
 | `PUT` | `/api/approval/:id/approve` | Approve content |
 | `PUT` | `/api/approval/:id/reject` | Reject content (with reason) |
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/fire.png" alt="divider" width="100%">
 
 ## 🎨 Design System
 
@@ -530,7 +532,7 @@ async getAll(filters = {}) {
 | Text | Light on dark | Dark on light |
 | Persistence | `localStorage` | Auto-detects OS preference |
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png" alt="divider" width="100%">
 
 ## 📋 Component Architecture
 
@@ -567,7 +569,7 @@ graph TD
     style PR fill:#c75c5c,color:#fff
 ```
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png" alt="divider" width="100%">
 
 ## ⚙️ Configuration
 
@@ -595,7 +597,7 @@ graph TD
 | Schedule Computation | Client-side from timestamps |
 | Access | Public (no authentication) |
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png" alt="divider" width="100%">
 
 ## 🧪 Mock Data System
 
@@ -608,7 +610,7 @@ The project includes a complete mock backend (`src/services/mock-data.js`) that 
 - 📊 **Statistics** — Dynamic stat computation
 - ⚠️ **Error simulation** — Toggle-able via `SIMULATE_ERRORS` flag
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/vintage.png" alt="divider" width="100%">
 
 ## 📱 Responsive Design
 
@@ -618,7 +620,7 @@ The project includes a complete mock backend (`src/services/mock-data.js`) that 
 | `640px - 1024px` | Tablet — adaptive grid, slide-out sidebar |
 | `> 1024px` | Desktop — full sidebar, multi-column grids |
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/fire.png" alt="divider" width="100%">
 
 ## 🤝 Contributing
 
@@ -638,7 +640,7 @@ git push origin feature/amazing-feature
 # 5. Open a Pull Request
 ```
 
-<br/>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png" alt="divider" width="100%">
 
 ## 📄 License
 
