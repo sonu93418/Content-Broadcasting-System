@@ -58,16 +58,21 @@ function LoginForm() {
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      // Start redirect animation
-      setIsRedirecting(true);
+      // Start redirect animation on next render using setTimeout
+      const animTimer = setTimeout(() => {
+        setIsRedirecting(true);
+      }, 0);
       
       // Wait for animation, then redirect
-      const timer = setTimeout(() => {
+      const redirectTimer = setTimeout(() => {
         const redirectPath = user.role === ROLES.PRINCIPAL ? ROUTES.PRINCIPAL.DASHBOARD : ROUTES.TEACHER.DASHBOARD;
         router.replace(redirectPath);
       }, 1000);
 
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(animTimer);
+        clearTimeout(redirectTimer);
+      };
     }
   }, [isAuthenticated, user, router]);
 
@@ -372,7 +377,7 @@ function LoginForm() {
 
             {/* Animated overlay during submission */}
             {isSubmitting && (
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent to-black/5 animate-fade-in pointer-events-none" />
+              <div className="absolute inset-0 rounded-2xl bg-linear-to-b from-transparent to-black/5 animate-fade-in pointer-events-none" />
             )}
 
             {/* Demo Credentials */}

@@ -5,7 +5,7 @@
    Warm cocoa + amber gold + matcha accents
    ============================================ */
 
-@theme {
+:root {
   --color-primary: #c2785c;
   --color-primary-light: #d4956e;
   --color-primary-dark: #a0604a;
