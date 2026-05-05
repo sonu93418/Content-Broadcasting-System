@@ -156,19 +156,29 @@ export default function HomePage() {
       {/* ===== STUDENT DEMO FRAME ===== */}
       <section className="py-16 px-4 relative">
         <div className="max-w-5xl mx-auto">
-          <div className="glass-card p-2 sm:p-3" style={{ borderRadius: '20px' }}>
-            <div className="rounded-2xl overflow-hidden relative">
-              <img src="/mock/student-demo.png" alt="Indian classroom with students viewing broadcast content" className="w-full h-auto object-cover" style={{ maxHeight: '480px', objectFit: 'cover' }} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                <div className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold text-white" style={{ background: 'rgba(199,92,92,0.85)', backdropFilter: 'blur(8px)' }}>
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
-                  </span>
-                  LIVE BROADCAST
+          <div className="glass-card overflow-hidden" style={{ borderRadius: '20px' }}>
+            {/* MacBook Window Chrome */}
+            <div className="flex items-center gap-2 px-5 py-3" style={{ background: 'var(--bg-surface-light)', borderBottom: '1px solid var(--border-color)' }}>
+              <span className="w-3 h-3 rounded-full" style={{ background: '#FF5F57' }} />
+              <span className="w-3 h-3 rounded-full" style={{ background: '#FEBC2E' }} />
+              <span className="w-3 h-3 rounded-full" style={{ background: '#28C840' }} />
+              <span className="text-xs font-medium ml-3" style={{ color: 'var(--text-muted)' }}>ContentCast — Live Broadcasting</span>
+            </div>
+            {/* Content */}
+            <div className="p-2 sm:p-3">
+              <div className="rounded-2xl overflow-hidden relative">
+                <img src="/mock/student-demo.png" alt="Indian classroom with students viewing broadcast content" className="w-full h-auto object-cover" style={{ maxHeight: '480px', objectFit: 'cover' }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold text-white" style={{ background: 'rgba(199,92,92,0.85)', backdropFilter: 'blur(8px)' }}>
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
+                    </span>
+                    LIVE BROADCAST
+                  </div>
+                  <span className="text-xs text-white/80 font-medium px-3 py-1 rounded-full" style={{ background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(8px)' }}>Student View</span>
                 </div>
-                <span className="text-xs text-white/80 font-medium px-3 py-1 rounded-full" style={{ background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(8px)' }}>Student View</span>
               </div>
             </div>
           </div>

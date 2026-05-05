@@ -111,20 +111,30 @@ export default function TeacherDashboard() {
           </div>
         </div>
 
-        {/* Student demo image */}
-        <div className="glass-card p-2.5 animate-fade-in" style={{ animationDelay: '600ms' }}>
-          <div className="rounded-xl overflow-hidden relative">
-            <img src="/mock/student-demo.png" alt="Indian classroom broadcast view" className="w-full h-auto object-cover" style={{ maxHeight: '280px', objectFit: 'cover' }} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-            <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold text-white" style={{ background: 'rgba(199,92,92,0.8)' }}>
-              <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" /><span className="relative inline-flex rounded-full h-2 w-2 bg-white" /></span>
-              LIVE — Student View
-            </div>
-            <a href={`/live/${user?.id}`} target="_blank" className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium text-white transition-all hover:scale-105" style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(6px)' }}>
-              Open <HiOutlineArrowTopRightOnSquare className="w-3 h-3" />
-            </a>
+        {/* Student demo image — MacBook Frame */}
+        <div className="glass-card animate-fade-in overflow-hidden" style={{ animationDelay: '600ms', borderRadius: '16px' }}>
+          {/* MacBook Window Chrome */}
+          <div className="flex items-center gap-2 px-4 py-3" style={{ background: 'var(--bg-surface-light)', borderBottom: '1px solid var(--border-color)' }}>
+            <span className="w-3 h-3 rounded-full" style={{ background: '#FF5F57' }} />
+            <span className="w-3 h-3 rounded-full" style={{ background: '#FEBC2E' }} />
+            <span className="w-3 h-3 rounded-full" style={{ background: '#28C840' }} />
+            <span className="text-xs font-medium ml-3" style={{ color: 'var(--text-muted)' }}>ContentCast — Live Student View</span>
           </div>
-          <p className="text-center text-xs mt-2.5 mb-1" style={{ color: 'var(--text-muted)' }}>This is how students see your approved broadcast content</p>
+          {/* Content */}
+          <div className="p-2.5">
+            <div className="rounded-lg overflow-hidden relative">
+              <img src="/mock/student-demo.png" alt="Indian classroom broadcast view" className="w-full h-auto object-cover" style={{ maxHeight: '280px', objectFit: 'cover' }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold text-white" style={{ background: 'rgba(199,92,92,0.8)' }}>
+                <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" /><span className="relative inline-flex rounded-full h-2 w-2 bg-white" /></span>
+                LIVE — Student View
+              </div>
+              <a href={`/live/${user?.id}`} target="_blank" className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium text-white transition-all hover:scale-105" style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(6px)' }}>
+                Open <HiOutlineArrowTopRightOnSquare className="w-3 h-3" />
+              </a>
+            </div>
+            <p className="text-center text-xs mt-2.5 mb-1" style={{ color: 'var(--text-muted)' }}>This is how students see your approved broadcast content</p>
+          </div>
         </div>
       </div>
     </DashboardLayout>
