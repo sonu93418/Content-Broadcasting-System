@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ContentCast — Content Broadcasting System
 
-## Getting Started
+A modern educational content broadcasting platform built with Next.js, Tailwind CSS, and React.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-15-black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-blue)
+![React](https://img.shields.io/badge/React-19-61DAFB)
+
+## Features
+
+- **Authentication** — Role-based login for teachers and principals
+- **Teacher Dashboard** — Upload content, track submission status
+- **Principal Dashboard** — Review, approve, or reject content with reasons
+- **Live Broadcasting** — Public page for students to view active content
+- **File Upload** — Drag-and-drop with preview, validation (JPG/PNG/GIF, 10MB max)
+- **Search & Filter** — Search by title/subject/teacher, filter by status
+- **Responsive Design** — Mobile-first with sidebar navigation
+- **Skeleton Loaders** — Premium loading states throughout
+- **Dark Theme** — Glassmorphism design with gradient accents
+
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Language:** JavaScript (ES6+)
+- **Styling:** Tailwind CSS 4
+- **Forms:** React Hook Form + Zod validation
+- **State:** React Context + Custom Hooks
+- **Icons:** React Icons (Heroicons)
+
+## Setup & Run
 
 ```bash
+# Clone the repository
+git clone <repository-url>
+cd content_broadcasting
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Demo Credentials
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Role | Email | Password |
+|------|-------|----------|
+| Teacher | teacher@school.com | teacher123 |
+| Principal | principal@school.com | principal123 |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/            # Pages (App Router)
+├── components/     # Reusable UI & layout components
+├── context/        # Auth context provider
+├── hooks/          # Custom data hooks
+├── services/       # API service layer
+└── utils/          # Constants & helpers
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Key Design Decisions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Service Layer Pattern** — All API calls isolated in service files, easily replaceable
+2. **Mock Data Layer** — Simulates backend with realistic delays; swap for real API by updating service files
+3. **Custom Hooks** — `useContent`, `useLiveContent`, `useUpload` encapsulate data logic
+4. **Protected Routes** — HOC-based auth guard with role enforcement
+5. **Component Memoization** — React.memo on UI components to optimize re-renders
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT

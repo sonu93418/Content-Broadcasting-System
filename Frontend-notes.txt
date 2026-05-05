@@ -1,0 +1,118 @@
+Frontend-Notes: Content Broadcasting System (ContentCast)
+=========================================================
+
+1. PROJECT STRUCTURE
+-------------------
+src/
+├── app/                          # Next.js App Router pages
+│   ├── layout.js                 # Root layout (AuthProvider, fonts, metadata)
+│   ├── page.js                   # Landing page with auto-redirect
+│   ├── login/page.js             # Authentication page
+│   ├── teacher/
+│   │   ├── dashboard/page.js     # Teacher dashboard with stats
+│   │   ├── upload/page.js        # Content upload form
+│   │   └── my-content/page.js    # Teacher's content listing
+│   ├── principal/
+│   │   ├── dashboard/page.js     # Principal dashboard with stats
+│   │   ├── pending/page.js       # Pending approvals with actions
+│   │   └── all-content/page.js   # All content with filters
+│   └── live/[teacherId]/page.js  # Public live broadcasting page
+├── components/
+│   ├── layout/
+│   │   ├── Sidebar.js            # Responsive sidebar with role-based nav
+│   │   ├── DashboardLayout.js    # Layout wrapper for authenticated pages
+│   │   └── ProtectedRoute.js     # Auth guard with role enforcement
+│   └── ui/
+│       ├── ContentCard.js        # Rich content display card
+│       ├── EmptyState.js         # Empty data state
+│       ├── ErrorState.js         # Error state with retry
+│       ├── FileUpload.js         # Drag-and-drop file upload
+│       ├── Modal.js              # Animated modal dialog
+│       ├── SearchFilter.js       # Search and status filter bar
+│       ├── SkeletonLoader.js     # Skeleton loading states
+│       ├── StatCard.js           # Dashboard stat card
+│       └── StatusBadge.js        # Status indicator badge
+├── context/
+│   └── AuthContext.js            # Auth state management
+├── hooks/
+│   ├── useContent.js             # Content data fetching hooks
+│   └── useUpload.js              # File upload management hook
+├── services/
+│   ├── api-client.js             # HTTP client with token management
+│   ├── auth.service.js           # Auth API service layer
+│   ├── content.service.js        # Content API service layer
+│   ├── approval.service.js       # Approval API service layer
+│   └── mock-data.js              # Mock backend with simulated delays
+└── utils/
+    ├── constants.js              # App constants (roles, statuses, routes)
+    └── helpers.js                # Utility functions
+
+
+2. AUTHENTICATION FLOW
+----------------------
+- User submits email/password on /login
+- AuthContext.login() calls authService.login()
+- On success, JWT token stored in localStorage
+- User object stored in AuthContext state
+- Automatic redirect based on role (teacher → /teacher/dashboard, principal → /principal/dashboard)
+- On page load, AuthContext checks for existing token and validates via getProfile()
+- Token attached to all API calls via api-client.js getAuthHeaders()
+- Logout clears token and redirects to /login
+- ProtectedRoute component guards authenticated pages and enforces role access
+
+Demo Credentials:
+  Teacher:   teacher@school.com / teacher123
+  Principal: principal@school.com / principal123
+
+
+3. ROLE-BASED ROUTING
+---------------------
+- ProtectedRoute component wraps all dashboard pages
+- Accepts `allowedRole` prop to restrict access
+- Unauthenticated users → redirect to /login
+- Wrong role → redirect to correct dashboard
+- Sidebar navigation dynamically renders based on user.role
+- /live/:teacherId is public, no auth required
+
+Routes:
+  Teacher:   /teacher/dashboard, /teacher/upload, /teacher/my-content
+  Principal: /principal/dashboard, /principal/pending, /principal/all-content
+  Public:    /live/:teacherId
+
+
+4. API INTEGRATION APPROACH
+---------------------------
+- All API calls go through dedicated service files (auth.service.js, content.service.js, approval.service.js)
+- NO direct API calls inside components
+- Services currently use mock-data.js which simulates network delays (400-1000ms)
+- To connect to real backend: replace mock imports in service files with apiCall() from api-client.js
+- api-client.js provides: token management, auth headers, generic fetch wrapper
+- Each service method has a comment showing the real API call equivalent
+
+Replacing mock with real API:
+  1. Update API_BASE_URL in constants.js
+  2. In each service file, uncomment apiCall imports
+  3. Replace mock function calls with apiCall() calls
+  4. Adjust request/response shapes as needed
+
+
+5. STATE MANAGEMENT APPROACH
+-----------------------------
+- AuthContext (React Context) for global auth state
+- Custom hooks for data fetching (useContent, useTeacherContent, useContentStats, useLiveContent)
+- Local component state for UI concerns (modals, filters, form state)
+- React Hook Form + Zod for form state and validation
+- No unnecessary global state - data fetched where needed
+- Memoization via React.memo on UI components to prevent re-renders
+
+
+6. ASSUMPTIONS
+--------------
+- JWT token stored in localStorage (secure httpOnly cookies preferred in production)
+- File uploads create blob URLs for preview (real backend would return CDN URLs)
+- Mock data simulates 600-1000ms network delays for realistic UX
+- Live page polls every 30 seconds for new content
+- Content rotation uses setTimeout based on rotationDuration field
+- Schedule status (active/scheduled/expired) computed client-side from timestamps
+- Max file size: 10MB, allowed types: JPG, PNG, GIF
+- Error simulation disabled by default (set SIMULATE_ERRORS in mock-data.js)
