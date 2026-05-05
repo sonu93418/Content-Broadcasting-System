@@ -39,6 +39,7 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedRole, setSelectedRole] = useState(roleParam || null);
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   const defaultVals = selectedRole && DEMO_CREDS[selectedRole] ? DEMO_CREDS[selectedRole] : { email: '', password: '' };
 
@@ -49,7 +50,16 @@ function LoginForm() {
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      router.replace(user.role === ROLES.PRINCIPAL ? ROUTES.PRINCIPAL.DASHBOARD : ROUTES.TEACHER.DASHBOARD);
+      // Start redirect animation
+      setIsRedirecting(true);
+      
+      // Wait for animation, then redirect
+      const timer = setTimeout(() => {
+        const redirectPath = user.role === ROLES.PRINCIPAL ? ROUTES.PRINCIPAL.DASHBOARD : ROUTES.TEACHER.DASHBOARD;
+        router.replace(redirectPath);
+      }, 1000);
+
+      return () => clearTimeout(timer);
     }
   }, [isAuthenticated, user, router]);
 
@@ -70,6 +80,32 @@ function LoginForm() {
     catch { /* handled in context */ }
     finally { setIsSubmitting(false); }
   };
+
+  // Animated redirect screen
+  if (isRedirecting) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden" style={{ background: 'var(--bg-body)' }}>
+        <div className="absolute inset-0 animate-pulse" style={{ background: 'radial-gradient(circle, rgba(194,120,92,0.1) 0%, transparent 70%)' }} />
+        
+        <div className="relative z-10 text-center space-y-6 animate-fade-in">
+          <div className="w-20 h-20 rounded-2xl gradient-bg flex items-center justify-center mx-auto text-white animate-bounce">
+            <Logo size={40} />
+          </div>
+          
+          <div>
+            <h2 className="text-2xl font-bold gradient-text mb-2">Authenticating</h2>
+            <p style={{ color: 'var(--text-secondary)' }}>Redirecting to your dashboard...</p>
+          </div>
+
+          <div className="flex items-center justify-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0s' }} />
+            <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0.2s' }} />
+            <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0.4s' }} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (authLoading && !isSubmitting) {
     return (
@@ -92,40 +128,107 @@ function LoginForm() {
       </div>
 
       <div className="w-full max-w-md relative z-10 animate-fade-in">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl gradient-bg flex items-center justify-center mx-auto mb-4 text-white animate-float">
-            <Logo size={32} />
+        {/* Header Section */}
+        <div className="text-center mb-10">
+          <div className="w-20 h-20 rounded-3xl gradient-bg flex items-center justify-center mx-auto mb-6 text-white animate-float shadow-lg">
+            <Logo size={40} />
           </div>
-          <h1 className="text-3xl font-bold gradient-text mb-2">ContentCast</h1>
-          <p style={{ color: 'var(--text-secondary)' }}>Content Broadcasting System</p>
+          <h1 className="text-4xl font-bold gradient-text mb-3">ContentCast</h1>
+          <p className="text-sm font-medium mb-6" style={{ color: 'var(--text-secondary)' }}>Content Broadcasting System</p>
+          
+          {/* Website Description */}
+          <div className="mb-8 space-y-4">
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              The intelligent content broadcasting platform designed for educational institutions
+            </p>
+            <div className="grid grid-cols-3 gap-3 pt-6 border-t" style={{ borderColor: 'var(--border-color)' }}>
+              <div className="text-center px-2 py-3 rounded-lg" style={{ background: 'var(--bg-surface)' }}>
+                <div className="text-sm font-bold gradient-text mb-1">Multi-role</div>
+                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Access</p>
+              </div>
+              <div className="text-center px-2 py-3 rounded-lg" style={{ background: 'var(--bg-surface)' }}>
+                <div className="text-sm font-bold gradient-text mb-1">Real-time</div>
+                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Approval</p>
+              </div>
+              <div className="text-center px-2 py-3 rounded-lg" style={{ background: 'var(--bg-surface)' }}>
+                <div className="text-sm font-bold gradient-text mb-1">Secure</div>
+                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Broadcasting</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Role selector */}
+        {/* Combined Newsletter + Role Selector Section */}
         {!selectedRole && (
-          <div className="space-y-4 animate-fade-in">
-            <h2 className="text-lg font-semibold text-center mb-2" style={{ color: 'var(--text-primary)' }}>Choose your role</h2>
+          <div className="space-y-6">
+            {/* Newsletter Card */}
+            <div className="glass-card p-6 space-y-4 border border-white/10 hover:border-primary/40 transition-all duration-300 transform hover:scale-105 hover:shadow-lg animate-fade-in" style={{ animationDelay: '0s' }}>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-xl flex-none" style={{ background: 'linear-gradient(135deg, #c2785c, #a0604a)' }}>
+                  📧
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-base mb-1" style={{ color: 'var(--text-primary)' }}>Stay Updated</h3>
+                  <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Subscribe to ContentCast updates</p>
+                </div>
+              </div>
+              
+              <div className="space-y-3 pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
+                <p className="text-xs font-medium" style={{ color: 'var(--text-muted)' }}>Get exclusive insights</p>
+                <div className="space-y-2.5">
+                  <div className="flex items-center gap-3 animate-fade-in opacity-0" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
+                    <span className="text-primary font-bold">✓</span>
+                    <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Weekly tips & tutorials</span>
+                  </div>
+                  <div className="flex items-center gap-3 animate-fade-in opacity-0" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
+                    <span className="text-primary font-bold">✓</span>
+                    <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Feature announcements</span>
+                  </div>
+                  <div className="flex items-center gap-3 animate-fade-in opacity-0" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
+                    <span className="text-primary font-bold">✓</span>
+                    <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Exclusive content access</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            <button onClick={() => handleRoleSelect('teacher')} className="w-full glass-card glass-card-hover p-5 flex items-center gap-4 group text-left">
-              <div className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, #c2785c, #a0604a)' }}>
-                <HiOutlineAcademicCap className="w-7 h-7 text-white" />
+            {/* Divider */}
+            <div className="flex items-center gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="flex-1 h-px" style={{ background: 'var(--border-color)' }} />
+              <span className="text-xs font-semibold tracking-wide" style={{ color: 'var(--text-muted)' }}>SELECT ROLE</span>
+              <div className="flex-1 h-px" style={{ background: 'var(--border-color)' }} />
+            </div>
+
+            {/* Role Selection - Teacher */}
+            <button 
+              onClick={() => handleRoleSelect('teacher')} 
+              className="w-full glass-card p-6 flex items-center gap-4 group text-left transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-lg animate-fade-in transform" 
+              style={{ animationDelay: '0.5s' }}
+            >
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform duration-300 shadow-md" style={{ background: 'linear-gradient(135deg, #c2785c, #a0604a)' }}>
+                🎓
               </div>
-              <div className="flex-1">
-                <h3 className="text-base font-semibold" style={{ color: 'var(--text-primary)' }}>Sign in as Teacher</h3>
-                <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>Upload content, manage schedules, track approvals</p>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Sign in as Teacher</h3>
+                <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>Upload content, manage schedules, track approvals</p>
               </div>
-              <HiOutlineArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" style={{ color: 'var(--color-primary)' }} />
+              <HiOutlineArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300 shrink-0" style={{ color: 'var(--color-primary)' }} />
             </button>
 
-            <button onClick={() => handleRoleSelect('principal')} className="w-full glass-card glass-card-hover p-5 flex items-center gap-4 group text-left">
-              <div className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, #6dae7f, #4e9460)' }}>
-                <HiOutlineShieldCheck className="w-7 h-7 text-white" />
+            {/* Role Selection - Principal */}
+            <button 
+              onClick={() => handleRoleSelect('principal')} 
+              className="w-full glass-card p-6 flex items-center gap-4 group text-left transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-lg animate-fade-in transform" 
+              style={{ animationDelay: '0.6s' }}
+            >
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform duration-300 shadow-md" style={{ background: 'linear-gradient(135deg, #6dae7f, #4e9460)' }}>
+                🛡️
               </div>
-              <div className="flex-1">
-                <h3 className="text-base font-semibold" style={{ color: 'var(--text-primary)' }}>Sign in as Principal</h3>
-                <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>Review content, approve/reject, manage broadcasts</p>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Sign in as Principal</h3>
+                <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>Review content, approve/reject, manage broadcasts</p>
               </div>
-              <HiOutlineArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" style={{ color: '#6dae7f' }} />
+              <HiOutlineArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300 shrink-0" style={{ color: '#6dae7f' }} />
             </button>
           </div>
         )}
@@ -133,53 +236,149 @@ function LoginForm() {
         {/* Login form */}
         {selectedRole && (
           <div className="glass-card p-8 animate-scale-in">
-            <div className="flex items-center gap-3 mb-6">
-              <button onClick={() => { setSelectedRole(null); clearError(); reset({ email: '', password: '' }); }} className="w-9 h-9 rounded-xl flex items-center justify-center transition-all hover:-translate-x-1" style={{ background: 'var(--bg-surface-light)', border: '1px solid var(--border-color)' }}>
-                <HiOutlineArrowLeft className="w-4 h-4" style={{ color: 'var(--text-secondary)' }} />
+            {/* Header with Back Button */}
+            <div className="flex items-center gap-3 mb-8 pb-6 border-b" style={{ borderColor: 'var(--border-color)' }}>
+              <button 
+                onClick={() => { 
+                  setSelectedRole(null); 
+                  clearError(); 
+                  reset({ email: '', password: '' }); 
+                }} 
+                className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200 hover:-translate-x-1 active:scale-90 hover:shadow-md" 
+                style={{ background: 'var(--bg-surface-light)', border: '1px solid var(--border-color)' }}
+              >
+                <HiOutlineArrowLeft className="w-5 h-5" style={{ color: 'var(--text-secondary)' }} />
               </button>
-              <div>
-                <h2 className="text-lg font-semibold capitalize" style={{ color: 'var(--text-primary)' }}>{selectedRole} Login</h2>
-                <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Enter your credentials to continue</p>
+              <div className="flex-1">
+                <div className="flex items-center gap-3">
+                  <div 
+                    className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-lg"
+                    style={{ 
+                      background: selectedRole === 'teacher' 
+                        ? 'linear-gradient(135deg, #c2785c, #a0604a)' 
+                        : 'linear-gradient(135deg, #6dae7f, #4e9460)'
+                    }}
+                  >
+                    {selectedRole === 'teacher' ? '🎓' : '🛡️'}
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold capitalize" style={{ color: 'var(--text-primary)' }}>
+                      {selectedRole} Login
+                    </h2>
+                    <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+                      {selectedRole === 'teacher' 
+                        ? 'Upload content, manage schedules, track approvals'
+                        : 'Review content, approve/reject, manage broadcasts'}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
+            {/* Error Message */}
             {authError && (
-              <div className="bg-danger/10 border border-danger/20 rounded-xl p-4 mb-6 animate-fade-in">
-                <p className="text-sm text-danger">{authError}</p>
+              <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 animate-fade-in" style={{ background: 'rgba(239, 68, 68, 0.05)' }}>
+                <p className="text-sm font-medium text-red-600">{authError}</p>
               </div>
             )}
 
+            {/* Login Form */}
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>Email Address</label>
-                <div className="relative">
-                  <HiOutlineEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: 'var(--text-muted)' }} />
-                  <input {...register('email')} type="email" placeholder="Enter your email" className={`input-field pl-12 ${errors.email ? 'border-danger' : ''}`} autoComplete="email" />
+              {/* Email Field */}
+              <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
+                <label className="block text-sm font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Email Address</label>
+                <div className="relative group">
+                  <HiOutlineEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-200" style={{ color: 'var(--text-muted)' }} />
+                  <input 
+                    {...register('email')} 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    className={`w-full pl-12 pr-4 py-3 rounded-xl font-medium transition-all duration-200 border ${errors.email ? 'border-red-500' : 'border-transparent'}`}
+                    style={{ 
+                      background: 'var(--bg-surface)',
+                      color: 'var(--text-primary)',
+                      borderColor: errors.email ? '#ef4444' : 'transparent'
+                    }}
+                    autoComplete="email" 
+                  />
                 </div>
-                {errors.email && <p className="mt-1.5 text-sm text-danger animate-fade-in">{errors.email.message}</p>}
+                {errors.email && <p className="mt-2 text-sm font-medium text-red-600">{errors.email.message}</p>}
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>Password</label>
-                <div className="relative">
-                  <HiOutlineLockClosed className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: 'var(--text-muted)' }} />
-                  <input {...register('password')} type={showPassword ? 'text' : 'password'} placeholder="Enter your password" className={`input-field pl-12 pr-12 ${errors.password ? 'border-danger' : ''}`} autoComplete="current-password" />
-                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2" style={{ color: 'var(--text-muted)' }} tabIndex={-1}>
+              {/* Password Field */}
+              <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                <label className="block text-sm font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Password</label>
+                <div className="relative group">
+                  <HiOutlineLockClosed className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-200" style={{ color: 'var(--text-muted)' }} />
+                  <input 
+                    {...register('password')} 
+                    type={showPassword ? 'text' : 'password'} 
+                    placeholder="Enter your password" 
+                    className={`w-full pl-12 pr-12 py-3 rounded-xl font-medium transition-all duration-200 border ${errors.password ? 'border-red-500' : 'border-transparent'}`}
+                    style={{ 
+                      background: 'var(--bg-surface)',
+                      color: 'var(--text-primary)',
+                      borderColor: errors.password ? '#ef4444' : 'transparent'
+                    }}
+                    autoComplete="current-password" 
+                  />
+                  <button 
+                    type="button" 
+                    onClick={() => setShowPassword(!showPassword)} 
+                    className="absolute right-4 top-1/2 -translate-y-1/2 transition-all duration-200 hover:scale-110 active:scale-95" 
+                    style={{ color: 'var(--text-muted)' }} 
+                    tabIndex={-1}
+                  >
                     {showPassword ? <HiOutlineEyeSlash className="w-5 h-5" /> : <HiOutlineEye className="w-5 h-5" />}
                   </button>
                 </div>
-                {errors.password && <p className="mt-1.5 text-sm text-danger animate-fade-in">{errors.password.message}</p>}
+                {errors.password && <p className="mt-2 text-sm font-medium text-red-600">{errors.password.message}</p>}
               </div>
 
-              <button type="submit" disabled={isSubmitting} className="btn-primary w-full py-3 text-base flex items-center justify-center gap-2">
-                {isSubmitting ? (<><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />Signing in...</>) : 'Sign In'}
+              {/* Submit Button */}
+              <button 
+                type="submit" 
+                disabled={isSubmitting || isRedirecting} 
+                className="w-full py-3 mt-6 text-base font-bold flex items-center justify-center gap-3 rounded-xl transition-all duration-200 relative overflow-hidden" 
+                style={{ 
+                  background: isSubmitting ? 'var(--color-primary)' : 'linear-gradient(135deg, var(--color-primary), #a0604a)',
+                  color: 'white',
+                  opacity: isSubmitting || isRedirecting ? 0.7 : 1,
+                  cursor: isSubmitting || isRedirecting ? 'not-allowed' : 'pointer'
+                }}
+              >
+                {isSubmitting && (
+                  <div className="absolute inset-0 bg-white/20 animate-pulse" />
+                )}
+                
+                <span className="relative flex items-center gap-2">
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                      Authenticating...
+                    </>
+                  ) : (
+                    'Sign In'
+                  )}
+                </span>
               </button>
             </form>
 
-            <div className="mt-5 pt-5" style={{ borderTop: '1px solid var(--border-color)' }}>
-              <p className="text-xs text-center mb-2" style={{ color: 'var(--text-muted)' }}>Demo Credentials (pre-filled)</p>
-              <div className="rounded-xl p-3 text-center" style={{ background: 'var(--bg-surface)' }}>
-                <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>{DEMO_CREDS[selectedRole]?.email} / {DEMO_CREDS[selectedRole]?.password}</p>
+            {/* Animated overlay during submission */}
+            {isSubmitting && (
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent to-black/5 animate-fade-in pointer-events-none" />
+            )}
+
+            {/* Demo Credentials */}
+            <div className="mt-8 pt-6 border-t text-center animate-fade-in" style={{ borderColor: 'var(--border-color)', animationDelay: '0.4s' }}>
+              <p className="text-xs font-semibold tracking-wide mb-3" style={{ color: 'var(--text-muted)' }}>DEMO CREDENTIALS (AUTO-FILLED)</p>
+              <div className="rounded-xl p-4 transition-all duration-200 hover:shadow-md" style={{ background: 'var(--bg-surface)' }}>
+                <p className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
+                  <span style={{ color: 'var(--text-primary)' }}>Email:</span> {DEMO_CREDS[selectedRole]?.email}
+                </p>
+                <p className="text-sm font-medium mt-2" style={{ color: 'var(--text-secondary)' }}>
+                  <span style={{ color: 'var(--text-primary)' }}>Password:</span> {DEMO_CREDS[selectedRole]?.password}
+                </p>
               </div>
             </div>
           </div>
