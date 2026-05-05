@@ -41,12 +41,20 @@ function LoginForm() {
   const [selectedRole, setSelectedRole] = useState(roleParam || null);
   const [isRedirecting, setIsRedirecting] = useState(false);
 
-  const defaultVals = selectedRole && DEMO_CREDS[selectedRole] ? DEMO_CREDS[selectedRole] : { email: '', password: '' };
-
   const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
     resolver: zodResolver(loginSchema),
-    defaultValues: defaultVals,
+    defaultValues: { email: '', password: '' },
   });
+
+  // Update form values when role changes
+  useEffect(() => {
+    if (selectedRole && DEMO_CREDS[selectedRole]) {
+      const creds = DEMO_CREDS[selectedRole];
+      reset({ email: creds.email, password: creds.password });
+    } else {
+      reset({ email: '', password: '' });
+    }
+  }, [selectedRole, reset]);
 
   useEffect(() => {
     if (isAuthenticated && user) {
@@ -63,15 +71,13 @@ function LoginForm() {
     }
   }, [isAuthenticated, user, router]);
 
-  useEffect(() => { return () => clearError(); }, [clearError]);
+  useEffect(() => { 
+    return () => clearError(); 
+  }, [clearError]);
 
   const handleRoleSelect = (role) => {
     setSelectedRole(role);
     clearError();
-    if (DEMO_CREDS[role]) {
-      setValue('email', DEMO_CREDS[role].email);
-      setValue('password', DEMO_CREDS[role].password);
-    }
   };
 
   const onSubmit = async (data) => {
