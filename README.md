@@ -1,19 +1,28 @@
 <div align="center">
 
-# 📡 ContentCast
+<!-- Animated Capsule Banner -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:C2785C,25:D4A853,50:6DAE7F,75:6B8FB5,100:C75C5C&height=220&section=header&text=📡%20ContentCast&fontSize=50&fontColor=ffffff&fontAlignY=35&desc=Content%20Broadcasting%20System&descSize=18&descColor=ffffff&descAlignY=55&animation=fadeIn" width="100%" />
 
-### *Seamless Content Delivery — From Teachers To Students*
+<!-- Animated Typing Effect -->
+<a href="https://github.com/sonu93418/Content-Broadcasting-System">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=24&duration=3000&pause=1000&color=C2785C&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=80&lines=%E2%9C%A8+Seamless+Content+Delivery;%F0%9F%91%A8%E2%80%8D%F0%9F%8F%AB+Teachers+Upload+%E2%86%92+%F0%9F%8F%AB+Principals+Approve+%E2%86%92+%F0%9F%8E%93+Students+View" alt="Typing SVG" />
+</a>
 
 <br/>
 
+<!-- Tech Stack Badges -->
 [![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Zustand](https://img.shields.io/badge/Zustand-433E38?style=for-the-badge&logo=react&logoColor=white)](https://zustand-demo.pmnd.rs/)
+[![Zod](https://img.shields.io/badge/Zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white)](https://zod.dev/)
 
+<!-- Status Badges -->
 [![License](https://img.shields.io/badge/License-MIT-C2785C?style=flat-square)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-6DAE7F?style=flat-square)](CONTRIBUTING.md)
-[![Maintenance](https://img.shields.io/badge/Maintained-Yes-D4A853?style=flat-square)](https://github.com/sonu93418/Content-Broadcasting-System)
+[![Maintained](https://img.shields.io/badge/Maintained-Yes-D4A853?style=flat-square)](https://github.com/sonu93418/Content-Broadcasting-System)
+[![Made with Love](https://img.shields.io/badge/Made%20with-❤️-C75C5C?style=flat-square)](https://github.com/sonu93418)
 
 <br/>
 
@@ -643,13 +652,38 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 <br/>
 
-**Built with ❤️ for Educational Institutions**
+<!-- Animated Footer Typing -->
+<a href="https://github.com/sonu93418">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=18&duration=4000&pause=2000&color=C2785C&center=true&vCenter=true&repeat=true&width=500&height=40&lines=Built+with+%E2%9D%A4%EF%B8%8F+for+Educational+Institutions;Empowering+Teachers+%26+Students+Worldwide" alt="Footer Typing" />
+</a>
 
 <br/>
 
-[![GitHub Stars](https://img.shields.io/github/stars/sonu93418/Content-Broadcasting-System?style=social)](https://github.com/sonu93418/Content-Broadcasting-System)
-[![GitHub Forks](https://img.shields.io/github/forks/sonu93418/Content-Broadcasting-System?style=social)](https://github.com/sonu93418/Content-Broadcasting-System)
+[![GitHub Stars](https://img.shields.io/github/stars/sonu93418/Content-Broadcasting-System?style=for-the-badge&logo=github&color=D4A853&logoColor=white)](https://github.com/sonu93418/Content-Broadcasting-System)
+[![GitHub Forks](https://img.shields.io/github/forks/sonu93418/Content-Broadcasting-System?style=for-the-badge&logo=git&color=6DAE7F&logoColor=white)](https://github.com/sonu93418/Content-Broadcasting-System)
+[![GitHub Watchers](https://img.shields.io/github/watchers/sonu93418/Content-Broadcasting-System?style=for-the-badge&logo=eye&color=6B8FB5&logoColor=white)](https://github.com/sonu93418/Content-Broadcasting-System)
 
-<sub>Made by <a href="https://github.com/sonu93418">sonu93418</a> • ContentCast © 2026</sub>
+<br/>
+
+---
+
+### 👨‍💻 Developed by
+
+<a href="https://github.com/sonu93418">
+  <img src="https://img.shields.io/badge/Sonu%20Ray-C2785C?style=for-the-badge&logo=github&logoColor=white" alt="Sonu Ray" />
+</a>
+
+<br/>
+
+<a href="https://github.com/sonu93418">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=14&duration=3000&pause=1500&color=D4A853&center=true&vCenter=true&repeat=true&width=400&height=30&lines=%F0%9F%91%A8%E2%80%8D%F0%9F%92%BB+Full+Stack+Developer;%F0%9F%9A%80+Passionate+about+EdTech;%E2%AD%90+Star+this+repo+if+you+found+it+useful!" alt="Developer Typing" />
+</a>
+
+<br/>
+
+<sub>ContentCast © 2026 • Made with ❤️ by <a href="https://github.com/sonu93418"><b>Sonu Ray</b></a></sub>
+
+<!-- Footer Wave -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:C2785C,25:D4A853,50:6DAE7F,75:6B8FB5,100:C75C5C&height=120&section=footer" width="100%" />
 
 </div>
