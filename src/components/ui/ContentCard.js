@@ -7,7 +7,7 @@ import { formatDate, getScheduleStatus, truncateText } from '@/utils/helpers';
 import { HiOutlineClock, HiOutlineCalendar, HiOutlineUser } from 'react-icons/hi2';
 
 /**
- * Content card component for displaying content items
+ * Premium 3D content card with enhanced visuals
  */
 function ContentCard({
   content,
@@ -26,13 +26,13 @@ function ContentCard({
       style={{ animationDelay: `${delay}ms` }}
     >
       {/* Image Preview */}
-      <div className="relative h-48 bg-surface-light overflow-hidden">
+      <div className="relative h-48 overflow-hidden" style={{ background: 'var(--bg-surface-light)' }}>
         {content.fileUrl ? (
           <Image
             src={content.fileUrl}
             alt={content.title}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 group-hover:scale-110"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onError={(e) => {
               e.target.style.display = 'none';
@@ -41,7 +41,10 @@ function ContentCard({
           />
         ) : null}
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--bg-surface) 0%, transparent 60%)' }} />
+
+        {/* Glow effect on hover */}
+        <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-500" />
 
         {/* Status badges */}
         <div className="absolute top-3 left-3 flex gap-2">
@@ -57,17 +60,17 @@ function ContentCard({
       {/* Content */}
       <div className="p-5">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-xs font-medium text-primary-light bg-primary/10 px-2.5 py-1 rounded-full">
+          <span className="text-xs font-bold text-primary-light bg-primary/10 px-2.5 py-1 rounded-full border border-primary/15">
             {content.subject}
           </span>
         </div>
 
-        <h3 className="text-lg font-semibold text-text-primary mb-1.5 line-clamp-1">
+        <h3 className="text-lg font-bold mb-1.5 line-clamp-1" style={{ color: 'var(--text-primary)' }}>
           {content.title}
         </h3>
 
         {content.description && (
-          <p className="text-sm text-text-secondary mb-3 line-clamp-2">
+          <p className="text-sm mb-3 line-clamp-2 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             {truncateText(content.description, 100)}
           </p>
         )}
@@ -75,17 +78,17 @@ function ContentCard({
         {/* Meta info */}
         <div className="space-y-1.5 mb-4">
           {showTeacher && (
-            <div className="flex items-center gap-2 text-xs text-text-muted">
+            <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-muted)' }}>
               <HiOutlineUser className="w-3.5 h-3.5" />
               <span>{content.teacherName}</span>
             </div>
           )}
-          <div className="flex items-center gap-2 text-xs text-text-muted">
+          <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-muted)' }}>
             <HiOutlineCalendar className="w-3.5 h-3.5" />
             <span>{formatDate(content.startTime)} — {formatDate(content.endTime)}</span>
           </div>
           {content.rotationDuration && (
-            <div className="flex items-center gap-2 text-xs text-text-muted">
+            <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-muted)' }}>
               <HiOutlineClock className="w-3.5 h-3.5" />
               <span>{content.rotationDuration}s rotation</span>
             </div>
@@ -96,24 +99,24 @@ function ContentCard({
         {content.status === 'rejected' && content.rejectionReason && (
           <div className="bg-danger/10 border border-danger/20 rounded-lg p-3 mb-4">
             <p className="text-xs text-danger font-medium mb-0.5">Rejection Reason:</p>
-            <p className="text-xs text-text-secondary">{content.rejectionReason}</p>
+            <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>{content.rejectionReason}</p>
           </div>
         )}
 
         {/* Actions */}
         {showActions && content.status === 'pending' && (
-          <div className="flex gap-2 pt-2 border-t border-border">
+          <div className="flex gap-2 pt-3" style={{ borderTop: '1px solid var(--border-color)' }}>
             <button
               onClick={() => onApprove?.(content.id)}
               className="btn-success flex-1 text-sm py-2"
             >
-              Approve
+              ✓ Approve
             </button>
             <button
               onClick={() => onReject?.(content)}
               className="btn-danger flex-1 text-sm py-2"
             >
-              Reject
+              ✗ Reject
             </button>
           </div>
         )}

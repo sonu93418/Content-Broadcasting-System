@@ -197,6 +197,44 @@ let MOCK_CONTENT = [
     createdAt: daysAgo(12),
     updatedAt: daysAgo(11),
   },
+  {
+    id: 'content-9',
+    teacherId: 'teacher-1',
+    teacherName: 'Sarah Johnson',
+    title: 'Cell Division & Mitosis',
+    subject: 'Biology',
+    description: 'Step-by-step visual guide to mitosis and cell division phases with labeled diagrams.',
+    fileUrl: '/mock/photosynthesis.png',
+    fileName: 'cell-division.png',
+    fileType: 'image/png',
+    fileSize: 3100000,
+    status: 'approved',
+    rejectionReason: null,
+    startTime: hoursFromNow(2),
+    endTime: daysFromNow(7),
+    rotationDuration: 40,
+    createdAt: daysAgo(1),
+    updatedAt: daysAgo(1),
+  },
+  {
+    id: 'content-10',
+    teacherId: 'teacher-1',
+    teacherName: 'Sarah Johnson',
+    title: 'French Revolution Overview',
+    subject: 'History',
+    description: 'Key events of the French Revolution from 1789-1799 with timeline and cause-effect analysis.',
+    fileUrl: '/mock/ww2.png',
+    fileName: 'french-revolution.png',
+    fileType: 'image/png',
+    fileSize: 2700000,
+    status: 'approved',
+    rejectionReason: null,
+    startTime: daysFromNow(1),
+    endTime: daysFromNow(10),
+    rotationDuration: 50,
+    createdAt: daysAgo(1),
+    updatedAt: daysAgo(1),
+  },
 ];
 
 // Simulate network delay
@@ -229,8 +267,13 @@ export const mockAuthService = {
 
   async getProfile(token) {
     await delay(300);
-    const userId = token?.split('-')[3];
-    const user = MOCK_USERS.find((u) => u.id === `${userId ? userId : ''}`);
+    // Token format: 'mock-jwt-token-{userId}-{timestamp}'
+    // userId can contain hyphens (e.g. 'teacher-1'), so extract between 'token-' and last '-'
+    const parts = token?.split('-') || [];
+    // parts: ['mock', 'jwt', 'token', 'teacher', '1', 'timestamp']
+    // userId = everything from index 3 to second-to-last, joined by '-'
+    const userId = parts.length > 4 ? parts.slice(3, -1).join('-') : '';
+    const user = MOCK_USERS.find((u) => u.id === userId);
     if (!user) throw new Error('Invalid token');
     const { password: _, ...userData } = user;
     return userData;
@@ -306,6 +349,19 @@ export const mockContentService = {
       const end = new Date(c.endTime);
       return now >= start && now <= end;
     });
+    return { data: results, total: results.length };
+  },
+
+  async getScheduledContent(teacherId) {
+    await delay(400);
+    maybeError();
+    const now = new Date();
+    const results = MOCK_CONTENT.filter((c) => {
+      if (c.teacherId !== teacherId) return false;
+      if (c.status !== 'approved') return false;
+      const start = new Date(c.startTime);
+      return start > now; // starts in the future
+    }).sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
     return { data: results, total: results.length };
   },
 

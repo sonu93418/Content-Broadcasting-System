@@ -4,7 +4,9 @@ import { memo, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-import { ROUTES, ROLES } from '@/utils/constants';
+import { useTheme } from '@/context/ThemeContext';
+import { ROUTES } from '@/utils/constants';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 import {
   HiOutlineHome,
   HiOutlineCloudArrowUp,
@@ -14,6 +16,7 @@ import {
   HiOutlineBars3,
   HiOutlineXMark,
   HiOutlineArrowRightOnRectangle,
+  HiOutlineSignal,
 } from 'react-icons/hi2';
 import { MdCastConnected } from 'react-icons/md';
 
@@ -42,14 +45,14 @@ function Sidebar() {
   const NavContent = () => (
     <>
       {/* Logo */}
-      <div className="px-5 py-6 border-b border-border">
+      <div className="px-5 py-6" style={{ borderBottom: '1px solid var(--border-color)' }}>
         <Link href={isTeacher ? ROUTES.TEACHER.DASHBOARD : ROUTES.PRINCIPAL.DASHBOARD} className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center shadow-lg shadow-primary/20">
             <MdCastConnected className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-text-primary">ContentCast</h1>
-            <p className="text-[11px] text-text-muted capitalize">{user?.role} Panel</p>
+            <h1 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>ContentCast</h1>
+            <p className="text-[11px] capitalize" style={{ color: 'var(--text-muted)' }}>{user?.role} Panel</p>
           </div>
         </Link>
       </div>
@@ -66,30 +69,52 @@ function Sidebar() {
               className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
                 isActive
                   ? 'bg-primary/15 text-primary-light border border-primary/20'
-                  : 'text-text-secondary hover:text-text-primary hover:bg-surface-lighter/50'
+                  : 'border border-transparent'
               }`}
+              style={!isActive ? { color: 'var(--text-secondary)' } : undefined}
             >
               <item.icon className={`w-5 h-5 ${isActive ? 'text-primary-light' : ''}`} />
               {item.label}
             </Link>
           );
         })}
+
+        {/* Live broadcast link */}
+        {isTeacher && (
+          <Link
+            href={`/live/${user?.id}`}
+            target="_blank"
+            onClick={closeMobile}
+            className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 border border-transparent"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            <HiOutlineSignal className="w-5 h-5" />
+            View Live Page
+            <span className="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary-light font-bold">↗</span>
+          </Link>
+        )}
       </nav>
 
-      {/* User section */}
-      <div className="px-3 py-4 border-t border-border">
+      {/* Theme toggle + User section */}
+      <div className="px-3 py-4" style={{ borderTop: '1px solid var(--border-color)' }}>
+        {/* Theme toggle */}
+        <div className="flex items-center justify-between px-4 py-2 mb-3 rounded-xl" style={{ background: 'var(--bg-surface-light)' }}>
+          <span className="text-xs font-medium" style={{ color: 'var(--text-muted)' }}>Theme</span>
+          <ThemeToggle className="!w-8 !h-8 !rounded-lg" />
+        </div>
+
         <div className="flex items-center gap-3 px-4 py-3 mb-2">
-          <div className="w-9 h-9 rounded-xl gradient-bg flex items-center justify-center text-white text-sm font-bold">
+          <div className="w-9 h-9 rounded-xl gradient-bg flex items-center justify-center text-white text-sm font-bold shadow-md shadow-primary/15">
             {user?.name?.charAt(0) || 'U'}
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-medium text-text-primary truncate">{user?.name}</p>
-            <p className="text-xs text-text-muted truncate">{user?.email}</p>
+            <p className="text-sm font-medium truncate" style={{ color: 'var(--text-primary)' }}>{user?.name}</p>
+            <p className="text-xs truncate" style={{ color: 'var(--text-muted)' }}>{user?.email}</p>
           </div>
         </div>
         <button
           onClick={logout}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-text-secondary hover:text-danger hover:bg-danger/10 transition-all duration-200 w-full"
+          className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-danger hover:bg-danger/10 transition-all duration-200 w-full"
         >
           <HiOutlineArrowRightOnRectangle className="w-5 h-5" />
           Sign Out
@@ -103,34 +128,29 @@ function Sidebar() {
       {/* Mobile hamburger */}
       <button
         onClick={toggleMobile}
-        className="lg:hidden fixed top-4 left-4 z-50 w-10 h-10 rounded-xl bg-surface-light border border-border flex items-center justify-center"
+        className="lg:hidden fixed top-4 left-4 z-50 w-10 h-10 rounded-xl flex items-center justify-center"
+        style={{ background: 'var(--bg-surface-light)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
         aria-label="Toggle menu"
       >
-        {mobileOpen ? (
-          <HiOutlineXMark className="w-5 h-5 text-text-primary" />
-        ) : (
-          <HiOutlineBars3 className="w-5 h-5 text-text-primary" />
-        )}
+        {mobileOpen ? <HiOutlineXMark className="w-5 h-5" /> : <HiOutlineBars3 className="w-5 h-5" />}
       </button>
 
       {/* Mobile overlay */}
       {mobileOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
-          onClick={closeMobile}
-        />
+        <div className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40" onClick={closeMobile} />
       )}
 
       {/* Desktop sidebar */}
-      <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 bg-surface border-r border-border z-30">
+      <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 z-30" style={{ background: 'var(--bg-surface)', borderRight: '1px solid var(--border-color)' }}>
         <NavContent />
       </aside>
 
       {/* Mobile sidebar */}
       <aside
-        className={`lg:hidden fixed inset-y-0 left-0 w-72 bg-surface border-r border-border z-50 flex flex-col transform transition-transform duration-300 ${
+        className={`lg:hidden fixed inset-y-0 left-0 w-72 z-50 flex flex-col transform transition-transform duration-300 ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
+        style={{ background: 'var(--bg-surface)', borderRight: '1px solid var(--border-color)' }}
       >
         <NavContent />
       </aside>

@@ -10,7 +10,7 @@ import ProtectedRoute from './ProtectedRoute';
 function DashboardLayout({ children, allowedRole }) {
   return (
     <ProtectedRoute allowedRole={allowedRole}>
-      <div className="min-h-screen bg-[#030712]">
+      <div className="min-h-screen" style={{ background: 'var(--bg-body)' }}>
         <Sidebar />
         <main className="lg:pl-64">
           <div className="p-4 sm:p-6 lg:p-8 pt-16 lg:pt-8 max-w-7xl mx-auto">

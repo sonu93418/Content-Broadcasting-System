@@ -18,10 +18,10 @@ export default function PrincipalDashboard() {
     <DashboardLayout allowedRole={ROLES.PRINCIPAL}>
       <div className="space-y-8">
         <div className="animate-fade-in">
-          <h1 className="text-2xl sm:text-3xl font-bold text-text-primary mb-1">
-            Welcome, <span className="gradient-text">{user?.name?.split(' ').pop()}</span>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>
+            Welcome, <span className="gradient-text">{user?.name?.split(' ').pop()}</span> 🌸
           </h1>
-          <p className="text-text-secondary">Overview of all content across the institution</p>
+          <p style={{ color: 'var(--text-secondary)' }}>Overview of all content across the institution</p>
         </div>
 
         {loading ? (
@@ -40,23 +40,23 @@ export default function PrincipalDashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 animate-fade-in" style={{ animationDelay: '400ms' }}>
           <Link href={ROUTES.PRINCIPAL.PENDING} className="glass-card glass-card-hover p-6 group block">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-warning/15 border border-warning/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <HiOutlineClipboardDocumentCheck className="w-6 h-6 text-warning" />
+              <div className="w-14 h-14 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #fb923c, #f59e0b)', boxShadow: '0 8px 24px rgba(251,146,60,0.25)' }}>
+                <HiOutlineClipboardDocumentCheck className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-text-primary">Pending Approvals</h3>
-                <p className="text-sm text-text-secondary">{stats.pending} items awaiting review</p>
+                <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Pending Approvals</h3>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{stats.pending} items awaiting review</p>
               </div>
             </div>
           </Link>
           <Link href={ROUTES.PRINCIPAL.ALL_CONTENT} className="glass-card glass-card-hover p-6 group block">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-accent/15 border border-accent/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <HiOutlineRectangleStack className="w-6 h-6 text-accent" />
+              <div className="w-14 h-14 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #c084fc, #a855f7)', boxShadow: '0 8px 24px rgba(192,132,252,0.25)' }}>
+                <HiOutlineRectangleStack className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-text-primary">All Content</h3>
-                <p className="text-sm text-text-secondary">Browse and manage all submissions</p>
+                <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>All Content</h3>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Browse and manage all submissions</p>
               </div>
             </div>
           </Link>

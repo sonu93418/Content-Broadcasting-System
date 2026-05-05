@@ -69,6 +69,16 @@ const contentService = {
     // Replace with: return apiCall('GET', `/api/content/stats${teacherId ? `?teacherId=${teacherId}` : ''}`);
     return mockContentService.getStats(teacherId);
   },
+
+  /**
+   * Get upcoming scheduled content for a teacher (approved but not yet started)
+   * @param {string} teacherId
+   * @returns {Promise<{data: Array, total: number}>}
+   */
+  async getScheduledContent(teacherId) {
+    // Replace with: return apiCall('GET', `/api/content/scheduled/${teacherId}`);
+    return mockContentService.getScheduledContent(teacherId);
+  },
 };
 
 export default contentService;
