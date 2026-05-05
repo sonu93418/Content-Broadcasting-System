@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { useAuth } from '@/context/AuthContext';
 import { ROLES, ROUTES } from '@/utils/constants';
 import ThemeToggle from '@/components/ui/ThemeToggle';
-import { MdCastConnected } from 'react-icons/md';
+import Logo from '@/components/ui/Logo';
 import Link from 'next/link';
 import {
   HiOutlineEnvelope,
@@ -40,9 +40,7 @@ function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedRole, setSelectedRole] = useState(roleParam || null);
 
-  const defaultVals = selectedRole && DEMO_CREDS[selectedRole]
-    ? DEMO_CREDS[selectedRole]
-    : { email: '', password: '' };
+  const defaultVals = selectedRole && DEMO_CREDS[selectedRole] ? DEMO_CREDS[selectedRole] : { email: '', password: '' };
 
   const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
     resolver: zodResolver(loginSchema),
@@ -83,24 +81,11 @@ function LoginForm() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden" style={{ background: 'var(--bg-body)' }}>
-      {/* Ambient blurs */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/8 rounded-full blur-[100px]" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/8 rounded-full blur-[100px]" />
+      <div className="absolute top-0 left-1/4 w-80 h-80 rounded-full blur-[100px]" style={{ background: 'rgba(194,120,92,0.04)' }} />
 
-      {/* Sakura petals */}
-      <div className="sakura-bg">
-        {[...Array(5)].map((_, i) => (
-          <div key={i} className="petal" style={{
-            left: `${15 + i * 18}%`,
-            animationDuration: `${10 + i * 3}s`,
-            animationDelay: `${i * 2}s`,
-          }} />
-        ))}
-      </div>
-
-      {/* Top bar with back + theme toggle */}
+      {/* Top bar */}
       <div className="fixed top-0 left-0 right-0 z-30 px-4 sm:px-6 py-3 flex items-center justify-between">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium transition-all hover:text-primary-light hover:-translate-x-1 rounded-xl px-3 py-2" style={{ color: 'var(--text-secondary)' }}>
+        <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium transition-all hover:-translate-x-1 rounded-xl px-3 py-2" style={{ color: 'var(--text-secondary)' }}>
           <HiOutlineArrowLeft className="w-4 h-4" /> Back to Home
         </Link>
         <ThemeToggle />
@@ -109,8 +94,8 @@ function LoginForm() {
       <div className="w-full max-w-md relative z-10 animate-fade-in">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl gradient-bg flex items-center justify-center mx-auto mb-4 shadow-lg shadow-primary/20 animate-float">
-            <MdCastConnected className="w-8 h-8 text-white" />
+          <div className="w-16 h-16 rounded-2xl gradient-bg flex items-center justify-center mx-auto mb-4 text-white animate-float">
+            <Logo size={32} />
           </div>
           <h1 className="text-3xl font-bold gradient-text mb-2">ContentCast</h1>
           <p style={{ color: 'var(--text-secondary)' }}>Content Broadcasting System</p>
@@ -122,25 +107,25 @@ function LoginForm() {
             <h2 className="text-lg font-semibold text-center mb-2" style={{ color: 'var(--text-primary)' }}>Choose your role</h2>
 
             <button onClick={() => handleRoleSelect('teacher')} className="w-full glass-card glass-card-hover p-5 flex items-center gap-4 group text-left">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-lg shadow-primary/20">
+              <div className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, #c2785c, #a0604a)' }}>
                 <HiOutlineAcademicCap className="w-7 h-7 text-white" />
               </div>
               <div className="flex-1">
                 <h3 className="text-base font-semibold" style={{ color: 'var(--text-primary)' }}>Sign in as Teacher</h3>
                 <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>Upload content, manage schedules, track approvals</p>
               </div>
-              <HiOutlineArrowRight className="w-5 h-5 text-primary-light opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+              <HiOutlineArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" style={{ color: 'var(--color-primary)' }} />
             </button>
 
             <button onClick={() => handleRoleSelect('principal')} className="w-full glass-card glass-card-hover p-5 flex items-center gap-4 group text-left">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-success to-emerald-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-lg shadow-success/20">
+              <div className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, #6dae7f, #4e9460)' }}>
                 <HiOutlineShieldCheck className="w-7 h-7 text-white" />
               </div>
               <div className="flex-1">
                 <h3 className="text-base font-semibold" style={{ color: 'var(--text-primary)' }}>Sign in as Principal</h3>
                 <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>Review content, approve/reject, manage broadcasts</p>
               </div>
-              <HiOutlineArrowRight className="w-5 h-5 text-success opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+              <HiOutlineArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" style={{ color: '#6dae7f' }} />
             </button>
           </div>
         )}
@@ -179,7 +164,7 @@ function LoginForm() {
                 <div className="relative">
                   <HiOutlineLockClosed className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: 'var(--text-muted)' }} />
                   <input {...register('password')} type={showPassword ? 'text' : 'password'} placeholder="Enter your password" className={`input-field pl-12 pr-12 ${errors.password ? 'border-danger' : ''}`} autoComplete="current-password" />
-                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 transition-colors" style={{ color: 'var(--text-muted)' }} tabIndex={-1}>
+                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2" style={{ color: 'var(--text-muted)' }} tabIndex={-1}>
                     {showPassword ? <HiOutlineEyeSlash className="w-5 h-5" /> : <HiOutlineEye className="w-5 h-5" />}
                   </button>
                 </div>

@@ -16,6 +16,8 @@ import {
   HiOutlineCloudArrowUp,
   HiOutlineSignal,
   HiOutlineClipboardDocumentList,
+  HiOutlineLink,
+  HiOutlineArrowTopRightOnSquare,
 } from 'react-icons/hi2';
 import Link from 'next/link';
 import { ROUTES } from '@/utils/constants';
@@ -35,7 +37,7 @@ export default function TeacherDashboard() {
         {/* Header */}
         <div className="animate-fade-in">
           <h1 className="text-2xl sm:text-3xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>
-            Welcome back, <span className="gradient-text">{user?.name?.split(' ')[0]}</span> 🌸
+            Welcome back, <span className="gradient-text">{user?.name?.split(' ')[0]}</span>
           </h1>
           <p style={{ color: 'var(--text-secondary)' }}>Here&apos;s an overview of your content activity</p>
         </div>
@@ -58,11 +60,11 @@ export default function TeacherDashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in" style={{ animationDelay: '400ms' }}>
           <Link href={ROUTES.TEACHER.UPLOAD} className="glass-card glass-card-hover p-6 group block">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #e879a0, #d45d85)', boxShadow: '0 8px 24px rgba(232,121,160,0.25)' }}>
-                <HiOutlineCloudArrowUp className="w-7 h-7 text-white" />
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #c2785c, #a0604a)', boxShadow: '0 4px 12px rgba(194,120,92,0.15)' }}>
+                <HiOutlineCloudArrowUp className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Upload Content</h3>
+                <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>Upload Content</h3>
                 <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Create and submit new content</p>
               </div>
             </div>
@@ -70,11 +72,11 @@ export default function TeacherDashboard() {
 
           <Link href={ROUTES.TEACHER.MY_CONTENT} className="glass-card glass-card-hover p-6 group block">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', boxShadow: '0 8px 24px rgba(251,191,36,0.25)' }}>
-                <HiOutlineClipboardDocumentList className="w-7 h-7 text-white" />
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #d4a853, #b88e3a)', boxShadow: '0 4px 12px rgba(212,168,83,0.15)' }}>
+                <HiOutlineClipboardDocumentList className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>My Content</h3>
+                <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>My Content</h3>
                 <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Track your submissions</p>
               </div>
             </div>
@@ -82,45 +84,47 @@ export default function TeacherDashboard() {
 
           <Link href={`/live/${user?.id}`} target="_blank" className="glass-card glass-card-hover p-6 group block">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #34d399, #10b981)', boxShadow: '0 8px 24px rgba(52,211,153,0.25)' }}>
-                <HiOutlineSignal className="w-7 h-7 text-white" />
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #6dae7f, #4e9460)', boxShadow: '0 4px 12px rgba(109,174,127,0.15)' }}>
+                <HiOutlineSignal className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Live Preview</h3>
+                <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>Live Preview</h3>
                 <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>View your broadcast page</p>
               </div>
             </div>
           </Link>
         </div>
 
-        {/* Live link hint */}
+        {/* Live link */}
         <div className="glass-card p-6 animate-fade-in" style={{ animationDelay: '500ms' }}>
-          <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>📡 Your Live Broadcasting Link</h3>
+          <h3 className="text-base font-bold mb-2 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+            <HiOutlineLink className="w-5 h-5" style={{ color: 'var(--color-primary)' }} /> Your Live Broadcasting Link
+          </h3>
           <p className="text-sm mb-3" style={{ color: 'var(--text-secondary)' }}>Share this link with students to view your active content:</p>
           <div className="flex items-center gap-3 rounded-xl p-3" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-color)' }}>
-            <code className="text-sm text-primary-light flex-1 truncate">
+            <code className="text-sm flex-1 truncate" style={{ color: 'var(--color-primary-light)' }}>
               {liveUrl || `/live/${user?.id}`}
             </code>
-            <button
-              onClick={() => { navigator.clipboard?.writeText(liveUrl); }}
-              className="btn-primary text-xs py-2 px-4 shrink-0"
-            >
+            <button onClick={() => { navigator.clipboard?.writeText(liveUrl); }} className="btn-primary text-xs py-2 px-4 shrink-0">
               Copy Link
             </button>
           </div>
         </div>
 
         {/* Student demo image */}
-        <div className="glass-card p-3 animate-fade-in" style={{ animationDelay: '600ms' }}>
-          <div className="rounded-2xl overflow-hidden relative" style={{ boxShadow: '0 12px 40px rgba(232,121,160,0.1)' }}>
-            <img src="/mock/student-demo.png" alt="Student broadcast view" className="w-full h-auto object-cover" style={{ maxHeight: '300px', objectFit: 'cover' }} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-            <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold text-white" style={{ background: 'rgba(248,113,113,0.85)' }}>
+        <div className="glass-card p-2.5 animate-fade-in" style={{ animationDelay: '600ms' }}>
+          <div className="rounded-xl overflow-hidden relative">
+            <img src="/mock/student-demo.png" alt="Indian classroom broadcast view" className="w-full h-auto object-cover" style={{ maxHeight: '280px', objectFit: 'cover' }} />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold text-white" style={{ background: 'rgba(199,92,92,0.8)' }}>
               <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" /><span className="relative inline-flex rounded-full h-2 w-2 bg-white" /></span>
               LIVE — Student View
             </div>
+            <a href={`/live/${user?.id}`} target="_blank" className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium text-white transition-all hover:scale-105" style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(6px)' }}>
+              Open <HiOutlineArrowTopRightOnSquare className="w-3 h-3" />
+            </a>
           </div>
-          <p className="text-center text-xs mt-3 mb-1" style={{ color: 'var(--text-muted)' }}>🌸 This is how students see your approved broadcast content</p>
+          <p className="text-center text-xs mt-2.5 mb-1" style={{ color: 'var(--text-muted)' }}>This is how students see your approved broadcast content</p>
         </div>
       </div>
     </DashboardLayout>
