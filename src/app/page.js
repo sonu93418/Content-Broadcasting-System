@@ -12,7 +12,6 @@ import {
   HiOutlineSignal,
   HiOutlineAcademicCap,
   HiOutlineUserGroup,
-  HiOutlineBolt,
   HiOutlineArrowRight,
   HiOutlineClock,
   HiOutlineCheckBadge,
@@ -258,20 +257,6 @@ export default function HomePage() {
                 View Live Content <HiOutlineArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== TECH STACK ===== */}
-      <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="glass-card p-8 sm:p-10 text-center">
-            <h3 className="text-2xl font-bold mb-6">Built With <span className="gradient-text">Modern Tech</span></h3>
-            <div className="flex flex-wrap justify-center gap-3">
-              {['Next.js 15', 'React 19', 'Tailwind CSS 4', 'React Hook Form', 'Zod Validation', 'Zustand', 'React Icons'].map((t) => (
-                <span key={t} className="bg-surface border border-border rounded-full px-4 py-2 text-sm text-text-secondary font-medium">{t}</span>
-              ))}
-            </div>
           </div>
         </div>
       </section>
