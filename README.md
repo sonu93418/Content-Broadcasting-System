@@ -172,7 +172,10 @@ stateDiagram-v2
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/vintage.png" alt="divider" width="100%">
 
-## 📁 Project Structure
+<div align="center">
+<table>
+<tr><td>
+<p align="left">🔴 🟡 🟢 &nbsp; <b>Project Structure</b></p>
 
 ```
 content_broadcasting/
@@ -256,6 +259,10 @@ content_broadcasting/
         └── 📄 helpers.js              #    Date formatting, validation, etc.
 ```
 
+</td></tr>
+</table>
+</div>
+
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/fire.png" alt="divider" width="100%">
 
 ## 🚀 Getting Started
@@ -270,6 +277,11 @@ content_broadcasting/
 
 ### Installation
 
+<div align="center">
+<table>
+<tr><td>
+<p align="left">🔴 🟡 🟢 &nbsp; <b>Terminal</b></p>
+
 ```bash
 # 1️⃣  Clone the repository
 git clone https://github.com/sonu93418/Content-Broadcasting-System.git
@@ -283,6 +295,10 @@ npm install
 # 4️⃣  Start the development server
 npm run dev
 ```
+
+</td></tr>
+</table>
+</div>
 
 > 🌐 Open **http://localhost:3000** in your browser
 
@@ -465,13 +481,27 @@ sequenceDiagram
 
 The app uses a **clean service layer pattern** — no direct API calls in components.
 
+<div align="center">
+<table>
+<tr><td>
+<p align="left">🔴 🟡 🟢 &nbsp; <b>Data Flow</b></p>
+
 ```
 Component → Custom Hook → Service → API Client / Mock Data
 ```
 
+</td></tr>
+</table>
+</div>
+
 ### Connecting to a Real Backend
 
 The mock layer is designed for **zero-friction replacement**. Each service method includes a comment showing the real API equivalent:
+
+<div align="center">
+<table>
+<tr><td>
+<p align="left">🔴 🟡 🟢 &nbsp; <b>content.service.js</b></p>
 
 ```javascript
 // content.service.js — Current (mock)
@@ -484,6 +514,10 @@ async getAll(filters = {}) {
   return apiCall('GET', `/api/content?${new URLSearchParams(filters)}`);
 }
 ```
+
+</td></tr>
+</table>
+</div>
 
 **Steps to connect a real backend:**
 
@@ -626,6 +660,11 @@ The project includes a complete mock backend (`src/services/mock-data.js`) that 
 
 Contributions are welcome! Here's how:
 
+<div align="center">
+<table>
+<tr><td>
+<p align="left">🔴 🟡 🟢 &nbsp; <b>Terminal</b></p>
+
 ```bash
 # 1. Fork the repository
 # 2. Create a feature branch
@@ -639,6 +678,10 @@ git push origin feature/amazing-feature
 
 # 5. Open a Pull Request
 ```
+
+</td></tr>
+</table>
+</div>
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png" alt="divider" width="100%">
 
