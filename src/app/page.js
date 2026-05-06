@@ -255,7 +255,7 @@ export default function HomePage() {
             </div>
             {/* Content */}
             <div className="p-2 sm:p-3">
-              <div className="relative aspect-video overflow-hidden rounded-xl sm:rounded-2xl max-h-[50vh] sm:max-h-[60vh]">
+              <div className="relative aspect-video overflow-hidden rounded-xl sm:rounded-2xl">
                 <Image
                   src="/mock/student-demo.png"
                   alt="Indian classroom with students viewing broadcast content"
