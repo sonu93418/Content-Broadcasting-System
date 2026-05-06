@@ -254,8 +254,8 @@ export default function HomePage() {
               <span className="text-xs font-medium ml-3" style={{ color: 'var(--text-muted)' }}>ContentCast — Live Broadcasting</span>
             </div>
             {/* Content */}
-            <div className="p-2 sm:p-3">
-              <div className="relative aspect-video overflow-hidden rounded-xl sm:rounded-2xl max-h-[50vh] sm:max-h-[60vh]">
+            <div className="overflow-hidden" style={{ background: 'var(--bg-muted)' }}>
+              <div className="relative aspect-video w-full h-auto">
                 <Image
                   src="/mock/student-demo.png"
                   alt="Indian classroom with students viewing broadcast content"
@@ -264,7 +264,7 @@ export default function HomePage() {
                   className="object-cover"
                   priority
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                 <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 flex items-center justify-between">
                   <div className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold text-white" style={{ background: 'rgba(199,92,92,0.85)', backdropFilter: 'blur(8px)' }}>
                     <span className="relative flex h-2 w-2">
