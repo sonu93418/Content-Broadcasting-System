@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
 import { ROLES, ROUTES } from '@/utils/constants';
 import Link from 'next/link';
 import ThemeToggle from '@/components/ui/ThemeToggle';
-import Logo from '@/components/ui/Logo';
 import {
   HiOutlineCloudArrowUp,
   HiOutlineShieldCheck,
@@ -21,6 +21,76 @@ import {
   HiOutlineBars3,
   HiOutlineXMark,
 } from 'react-icons/hi2';
+
+function EduStreamMark({ size = 40, className = '' }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="edustream-ring" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#123b66" />
+          <stop offset="55%" stopColor="#c92c2c" />
+          <stop offset="100%" stopColor="#123b66" />
+        </linearGradient>
+      </defs>
+      <circle cx="32" cy="32" r="28" stroke="url(#edustream-ring)" strokeWidth="4" />
+      <path d="M19 39h26" stroke="#123b66" strokeWidth="3.5" strokeLinecap="round" />
+      <path d="M22 31h20l-10 6-10-6Z" fill="#123b66" />
+      <path d="M26 25h12l-1 8h-10l-1-8Z" fill="#123b66" />
+      <path d="M24 36h16" stroke="#c92c2c" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M46 23l4 8" stroke="#c92c2c" strokeWidth="2.5" strokeLinecap="round" />
+      <circle cx="50" cy="18" r="2.5" fill="#c92c2c" />
+      <path d="M49 32v10" stroke="#c92c2c" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M27 42h10" stroke="#123b66" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function MacBookFrame() {
+  return (
+    <div className="w-full max-w-md">
+      <div className="rounded-4xl border p-3 sm:p-4 shadow-2xl" style={{ background: 'var(--bg-card)', borderColor: 'var(--border-color)', boxShadow: 'var(--card-shadow)' }}>
+        <div className="rounded-3xl overflow-hidden border" style={{ borderColor: 'var(--border-color)', background: 'linear-gradient(180deg, rgba(18,29,44,0.98) 0%, rgba(10,16,28,0.98) 100%)' }}>
+          <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: '1px solid var(--border-color)' }}>
+            <span className="w-3 h-3 rounded-full" style={{ background: '#FF5F57' }} />
+            <span className="w-3 h-3 rounded-full" style={{ background: '#FEBC2E' }} />
+            <span className="w-3 h-3 rounded-full" style={{ background: '#28C840' }} />
+            <span className="text-xs font-medium ml-2 truncate" style={{ color: 'rgba(255,255,255,0.72)' }}>EduStream — Learn • Approve • Broadcast</span>
+          </div>
+
+          <div className="px-5 py-6 sm:px-6 sm:py-8">
+            <div className="rounded-[1.4rem] border p-5 sm:p-6 text-center" style={{ background: 'linear-gradient(135deg, rgba(18,58,101,0.95) 0%, rgba(201,44,44,0.92) 100%)', borderColor: 'rgba(255,255,255,0.08)' }}>
+              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-white/95 shadow-lg">
+                <EduStreamMark size={56} />
+              </div>
+              <h3 className="mt-5 text-2xl font-black tracking-tight text-white">EduStream</h3>
+              <p className="mt-2 text-sm leading-6 text-white/80">A focused space for teachers, principals, and live learning broadcasts.</p>
+
+              <div className="mt-5 rounded-2xl bg-white/10 p-3 backdrop-blur-sm">
+                <div className="flex items-center justify-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/85">
+                  <span>Learn</span>
+                  <span className="text-white/55">•</span>
+                  <span>Approve</span>
+                  <span className="text-white/55">•</span>
+                  <span>Broadcast</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mx-auto mt-4 h-3 w-28 rounded-full bg-white/15" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function HomePage() {
   const { isAuthenticated, user, loading } = useAuth();
@@ -66,11 +136,14 @@ export default function HomePage() {
           borderBottom: scrolled ? '1px solid var(--border-color)' : '1px solid transparent',
         }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl gradient-bg flex items-center justify-center text-white">
-              <Logo size={20} />
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/90 p-1 shadow-sm" style={{ border: '1px solid var(--border-color)' }}>
+              <EduStreamMark size={34} />
             </div>
-            <span className="text-lg font-bold gradient-text">ContentCast</span>
+            <div className="leading-tight">
+              <span className="block text-lg font-black tracking-tight" style={{ color: 'var(--text-primary)' }}>Edu<span className="gradient-text">Stream</span></span>
+              <span className="block text-[10px] font-semibold uppercase tracking-[0.22em]" style={{ color: 'var(--text-muted)' }}>ContentCast platform</span>
+            </div>
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
@@ -109,46 +182,51 @@ export default function HomePage() {
       </nav>
 
       {/* ===== HERO SECTION ===== */}
-      <section className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 px-4">
-        <div className="absolute top-20 left-1/4 w-[400px] h-[400px] rounded-full blur-[120px]" style={{ background: 'rgba(194,120,92,0.04)' }} />
+      <section className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 px-4">
+        <div className="absolute top-16 left-1/4 w-100 h-100 rounded-full blur-[120px]" style={{ background: 'rgba(194,120,92,0.04)' }} />
 
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 animate-fade-in" style={{ background: 'rgba(194,120,92,0.06)', border: '1px solid rgba(194,120,92,0.12)' }}>
-            <HiOutlineSignal className="w-3.5 h-3.5 text-primary" />
-            <span className="text-xs font-medium" style={{ color: 'var(--color-primary-light)' }}>Educational Content Broadcasting</span>
+        <div className="max-w-7xl mx-auto relative z-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div className="text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 animate-fade-in" style={{ background: 'rgba(194,120,92,0.06)', border: '1px solid rgba(194,120,92,0.12)' }}>
+              <HiOutlineSignal className="w-3.5 h-3.5 text-primary" />
+              <span className="text-xs font-medium" style={{ color: 'var(--color-primary-light)' }}>Educational Content Broadcasting</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 animate-fade-in">
+              Seamless Content Delivery{' '}
+              <span className="gradient-text">From Teachers</span>{' '}
+              <span style={{ color: 'var(--text-primary)' }}>To Students</span>
+            </h1>
+
+            <p className="text-lg sm:text-xl max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed animate-fade-in" style={{ color: 'var(--text-secondary)', animationDelay: '100ms' }}>
+              ContentCast empowers educational institutions with a streamlined workflow — teachers upload, principals approve, students view live broadcasts in real-time.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <Link href={ROUTES.LOGIN} className="btn-primary px-8 py-3.5 text-base flex items-center justify-center gap-2 group">
+                Get Started <HiOutlineArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link href="/live/teacher-1" className="btn-secondary px-8 py-3.5 text-base flex items-center justify-center gap-2">
+                <HiOutlineSignal className="w-4 h-4" /> View Live Demo
+              </Link>
+            </div>
+
+            <div className="mt-16 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 animate-fade-in" style={{ animationDelay: '400ms' }}>
+              {[
+                { num: '3', label: 'User Roles' },
+                { num: '\u221E', label: 'Content Uploads' },
+                { num: '24/7', label: 'Live Broadcasting' },
+              ].map((s, i) => (
+                <div key={i} className="text-center">
+                  <p className="text-2xl font-bold gradient-text">{s.num}</p>
+                  <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>{s.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 animate-fade-in">
-            Seamless Content Delivery{' '}
-            <span className="gradient-text">From Teachers</span>{' '}
-            <span style={{ color: 'var(--text-primary)' }}>To Students</span>
-          </h1>
-
-          <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in" style={{ color: 'var(--text-secondary)', animationDelay: '100ms' }}>
-            ContentCast empowers educational institutions with a streamlined workflow — teachers upload, principals approve, students view live broadcasts in real-time.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
-            <Link href={ROUTES.LOGIN} className="btn-primary px-8 py-3.5 text-base flex items-center justify-center gap-2 group">
-              Get Started <HiOutlineArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link href="/live/teacher-1" className="btn-secondary px-8 py-3.5 text-base flex items-center justify-center gap-2">
-              <HiOutlineSignal className="w-4 h-4" /> View Live Demo
-            </Link>
-          </div>
-
-          {/* Stats bar */}
-          <div className="mt-16 grid grid-cols-3 gap-4 max-w-lg mx-auto animate-fade-in" style={{ animationDelay: '400ms' }}>
-            {[
-              { num: '3', label: 'User Roles' },
-              { num: '\u221E', label: 'Content Uploads' },
-              { num: '24/7', label: 'Live Broadcasting' },
-            ].map((s, i) => (
-              <div key={i} className="text-center">
-                <p className="text-2xl font-bold gradient-text">{s.num}</p>
-                <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>{s.label}</p>
-              </div>
-            ))}
+          <div className="flex justify-center lg:justify-end animate-fade-in" style={{ animationDelay: '250ms' }}>
+            <MacBookFrame />
           </div>
         </div>
       </section>
@@ -166,9 +244,16 @@ export default function HomePage() {
             </div>
             {/* Content */}
             <div className="p-2 sm:p-3">
-              <div className="rounded-2xl overflow-hidden relative">
-                <img src="/mock/student-demo.png" alt="Indian classroom with students viewing broadcast content" className="w-full h-auto object-cover" style={{ maxHeight: '480px', objectFit: 'cover' }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              <div className="relative aspect-video min-h-65 overflow-hidden rounded-2xl">
+                <Image
+                  src="/mock/student-demo.png"
+                  alt="Indian classroom with students viewing broadcast content"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 960px"
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                   <div className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold text-white" style={{ background: 'rgba(199,92,92,0.85)', backdropFilter: 'blur(8px)' }}>
                     <span className="relative flex h-2 w-2">
@@ -322,10 +407,10 @@ export default function HomePage() {
       <footer style={{ borderTop: '1px solid var(--border-color)' }} className="py-8 px-4">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center text-white">
-              <Logo size={16} />
+            <div className="w-8 h-8 rounded-lg bg-white/90 flex items-center justify-center" style={{ border: '1px solid var(--border-color)' }}>
+              <EduStreamMark size={18} />
             </div>
-            <span className="text-sm font-bold gradient-text">ContentCast</span>
+            <span className="text-sm font-bold gradient-text">EduStream</span>
           </div>
           <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Content Broadcasting System — Built for Educational Institutions</p>
           <div className="flex gap-4">
