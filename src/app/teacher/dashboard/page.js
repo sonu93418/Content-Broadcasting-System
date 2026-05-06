@@ -123,8 +123,10 @@ export default function TeacherDashboard() {
           {/* Content */}
           <div className="p-2.5">
             <div className="rounded-lg overflow-hidden relative">
-              <img src="/mock/student-demo.png" alt="Indian classroom broadcast view" className="w-full h-auto object-cover" style={{ maxHeight: '280px', objectFit: 'cover' }} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              <div className="relative w-full max-h-70 overflow-hidden rounded-xl">
+                <Image src="/mock/student-demo.png" alt="Indian classroom broadcast view" fill className="object-cover" unoptimized />
+              </div>
+                  <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold text-white" style={{ background: 'rgba(199,92,92,0.8)' }}>
                 <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" /><span className="relative inline-flex rounded-full h-2 w-2 bg-white" /></span>
                 LIVE — Student View

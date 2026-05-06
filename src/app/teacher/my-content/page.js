@@ -64,7 +64,7 @@ export default function MyContentPage() {
           {selectedContent && (
             <div className="space-y-4">
               {selectedContent.fileUrl && (
-                <div className="relative h-56 bg-surface rounded-xl overflow-hidden">
+                <div className="relative aspect-video overflow-hidden rounded-xl bg-surface min-h-36">
                   <Image src={selectedContent.fileUrl} alt={selectedContent.title} fill className="object-contain" unoptimized />
                 </div>
               )}
@@ -77,7 +77,7 @@ export default function MyContentPage() {
               <h3 className="text-lg font-semibold text-text-primary">{selectedContent.title}</h3>
               <p className="text-sm text-primary-light">{selectedContent.subject}</p>
               {selectedContent.description && <p className="text-sm text-text-secondary">{selectedContent.description}</p>}
-              <div className="grid grid-cols-2 gap-3 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                 <div><span className="text-text-muted">Start:</span> <span className="text-text-primary ml-1">{formatDate(selectedContent.startTime)}</span></div>
                 <div><span className="text-text-muted">End:</span> <span className="text-text-primary ml-1">{formatDate(selectedContent.endTime)}</span></div>
                 <div><span className="text-text-muted">Rotation:</span> <span className="text-text-primary ml-1">{selectedContent.rotationDuration}s</span></div>

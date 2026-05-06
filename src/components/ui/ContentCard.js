@@ -26,7 +26,7 @@ function ContentCard({
       style={{ animationDelay: `${delay}ms` }}
     >
       {/* Image Preview */}
-      <div className="relative h-48 overflow-hidden" style={{ background: 'var(--bg-surface-light)' }}>
+      <div className="relative aspect-video overflow-hidden" style={{ background: 'var(--bg-surface-light)' }}>
         {content.fileUrl ? (
           <Image
             src={content.fileUrl}

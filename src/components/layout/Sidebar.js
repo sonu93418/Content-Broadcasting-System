@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useState, useCallback } from 'react';
+import { memo, useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
@@ -40,6 +40,11 @@ function Sidebar() {
   const toggleMobile = useCallback(() => setMobileOpen((prev) => !prev), []);
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
   const NavContent = () => (
     <>
       <div className="px-5 py-6" style={{ borderBottom: '1px solid var(--border-color)' }}>
@@ -54,7 +59,7 @@ function Sidebar() {
         </Link>
       </div>
 
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto min-h-0">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
@@ -85,7 +90,7 @@ function Sidebar() {
       <div className="px-3 py-4" style={{ borderTop: '1px solid var(--border-color)' }}>
         <div className="flex items-center justify-between px-4 py-2 mb-3 rounded-xl" style={{ background: 'var(--bg-surface-light)' }}>
           <span className="text-xs font-medium" style={{ color: 'var(--text-muted)' }}>Theme</span>
-          <ThemeToggle className="!w-8 !h-8 !rounded-lg" />
+          <ThemeToggle className="w-8! h-8! rounded-lg!" />
         </div>
 
         <div className="flex items-center gap-3 px-4 py-3 mb-2">
@@ -117,11 +122,11 @@ function Sidebar() {
 
       {mobileOpen && <div className="lg:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-40" onClick={closeMobile} />}
 
-      <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 z-30" style={{ background: 'var(--bg-surface)', borderRight: '1px solid var(--border-color)' }}>
+      <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 z-30 overflow-hidden" style={{ background: 'var(--bg-surface)', borderRight: '1px solid var(--border-color)' }}>
         <NavContent />
       </aside>
 
-      <aside className={`lg:hidden fixed inset-y-0 left-0 w-72 z-50 flex flex-col transform transition-transform duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`} style={{ background: 'var(--bg-surface)', borderRight: '1px solid var(--border-color)' }}>
+      <aside className={`lg:hidden fixed inset-y-0 left-0 z-50 flex flex-col transform transition-transform duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`} style={{ width: 'min(18rem, calc(100vw - 1rem))', background: 'var(--bg-surface)', borderRight: '1px solid var(--border-color)' }}>
         <NavContent />
       </aside>
     </>

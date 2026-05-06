@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, memo, useCallback } from 'react';
+import Image from 'next/image';
 import { HiOutlineCloudArrowUp, HiOutlineXMark, HiOutlinePhoto } from 'react-icons/hi2';
 import { validateFile, formatFileSize } from '@/utils/helpers';
 import { ALLOWED_FILE_TYPES } from '@/utils/constants';
@@ -73,12 +74,14 @@ function FileUpload({ value, onChange, error: externalError, disabled = false })
       {preview ? (
         /* Preview state */
         <div className="relative glass-card overflow-hidden animate-scale-in">
-          <div className="relative h-56 bg-surface-light">
-            <img
-              src={preview}
-              alt="Upload preview"
-              className="w-full h-full object-contain"
-            />
+          <div className="relative aspect-video overflow-hidden bg-surface-light max-h-[45vh] sm:max-h-[60vh]">
+              <Image
+                src={preview}
+                alt="Upload preview"
+                fill
+                className="object-cover"
+                unoptimized
+              />
             {!disabled && (
               <button
                 onClick={handleRemove}
@@ -106,7 +109,7 @@ function FileUpload({ value, onChange, error: externalError, disabled = false })
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onClick={() => !disabled && inputRef.current?.click()}
-          className={`relative border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 ${
+          className={`relative border-2 border-dashed rounded-2xl p-6 sm:p-8 text-center cursor-pointer transition-all duration-300 ${
             dragActive
               ? 'border-primary bg-primary/5'
               : error

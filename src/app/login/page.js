@@ -207,9 +207,9 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ background: 'var(--bg-body)' }}>
+    <div className="min-h-screen relative" style={{ background: 'var(--bg-body)' }}>
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at top left, rgba(194,120,92,0.06) 0%, transparent 45%), radial-gradient(circle at right 15%, rgba(109,174,127,0.05) 0%, transparent 36%), radial-gradient(circle at bottom left, rgba(212,168,83,0.04) 0%, transparent 34%)' }} />
-      <div className="absolute right-8 top-20 h-56 w-56 rounded-full blur-3xl" style={{ background: 'rgba(194,120,92,0.06)' }} />
+      <div className="hidden sm:block absolute right-8 top-20 w-40 h-40 sm:w-56 sm:h-56 rounded-full blur-3xl" style={{ background: 'rgba(194,120,92,0.06)' }} />
 
       <div className="relative z-30 mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all hover:-translate-x-0.5 hover:shadow-md" style={{ color: 'var(--text-secondary)', background: 'var(--bg-card)', borderColor: 'var(--card-border)' }}>

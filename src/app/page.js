@@ -55,7 +55,7 @@ function EduStreamMark({ size = 40, className = '' }) {
 
 function MacBookFrame() {
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full">
       <div className="rounded-4xl border p-3 sm:p-4 shadow-2xl" style={{ background: 'var(--bg-card)', borderColor: 'var(--border-color)', boxShadow: 'var(--card-shadow)' }}>
         <div className="rounded-3xl overflow-hidden border" style={{ borderColor: 'var(--border-color)', background: 'linear-gradient(180deg, rgba(18,29,44,0.98) 0%, rgba(10,16,28,0.98) 100%)' }}>
           <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: '1px solid var(--border-color)' }}>
@@ -65,16 +65,17 @@ function MacBookFrame() {
             <span className="text-xs font-medium ml-2 truncate" style={{ color: 'rgba(255,255,255,0.72)' }}>EduStream — Learn • Approve • Broadcast</span>
           </div>
 
-          <div className="px-5 py-6 sm:px-6 sm:py-8">
-            <div className="rounded-[1.4rem] border p-5 sm:p-6 text-center" style={{ background: 'linear-gradient(135deg, rgba(18,58,101,0.95) 0%, rgba(201,44,44,0.92) 100%)', borderColor: 'rgba(255,255,255,0.08)' }}>
-              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-white/95 shadow-lg">
-                <EduStreamMark size={56} />
+          <div className="px-3 py-4 sm:px-6 sm:py-8">
+            <div className="rounded-[1.2rem] sm:rounded-[1.4rem] border p-3 sm:p-6 text-center" style={{ background: 'linear-gradient(135deg, rgba(18,58,101,0.95) 0%, rgba(201,44,44,0.92) 100%)', borderColor: 'rgba(255,255,255,0.08)' }}>
+              <div className="mx-auto flex h-14 w-14 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-white/95 shadow-lg">
+                <EduStreamMark size={38} className="sm:hidden" />
+                <EduStreamMark size={56} className="hidden sm:block" />
               </div>
-              <h3 className="mt-5 text-2xl font-black tracking-tight text-white">EduStream</h3>
+              <h3 className="mt-3 sm:mt-5 text-lg sm:text-2xl font-black tracking-tight text-white">EduStream</h3>
               <p className="mt-2 text-sm leading-6 text-white/80">A focused space for teachers, principals, and live learning broadcasts.</p>
 
-              <div className="mt-5 rounded-2xl bg-white/10 p-3 backdrop-blur-sm">
-                <div className="flex items-center justify-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/85">
+              <div className="mt-3 sm:mt-5 rounded-2xl bg-white/10 p-2.5 sm:p-3 backdrop-blur-sm">
+                <div className="flex items-center justify-center gap-2 sm:gap-3 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.12em] sm:tracking-[0.22em] text-white/85">
                   <span>Learn</span>
                   <span className="text-white/55">•</span>
                   <span>Approve</span>
@@ -110,6 +111,12 @@ export default function HomePage() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileMenu ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenu]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg-body)' }}>
@@ -124,6 +131,8 @@ export default function HomePage() {
     { href: '#roles', label: 'Roles' },
     { href: '/live/teacher-1', label: 'Live Demo', isRoute: true },
   ];
+
+  
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ background: 'var(--bg-body)', color: 'var(--text-primary)' }}>
@@ -142,7 +151,7 @@ export default function HomePage() {
             </div>
             <div className="leading-tight">
               <span className="block text-lg font-black tracking-tight" style={{ color: 'var(--text-primary)' }}>Edu<span className="gradient-text">Stream</span></span>
-              <span className="block text-[10px] font-semibold uppercase tracking-[0.22em]" style={{ color: 'var(--text-muted)' }}>ContentCast platform</span>
+              <span className="hidden sm:block text-[10px] font-semibold uppercase tracking-[0.22em]" style={{ color: 'var(--text-muted)' }}>ContentCast platform</span>
             </div>
           </Link>
 
@@ -166,7 +175,7 @@ export default function HomePage() {
         </div>
 
         {mobileMenu && (
-          <div className="md:hidden animate-fade-in" style={{ background: 'var(--overlay-bg)', backdropFilter: 'var(--glass-blur)', borderBottom: '1px solid var(--border-color)' }}>
+          <div className="md:hidden fixed top-16 left-0 right-0 z-40 animate-fade-in" style={{ background: 'var(--overlay-bg)', backdropFilter: 'var(--glass-blur)', borderBottom: '1px solid var(--border-color)' }}>
             <div className="px-4 py-4 space-y-2">
               {navLinks.map((link) =>
                 link.isRoute ? (
@@ -182,36 +191,36 @@ export default function HomePage() {
       </nav>
 
       {/* ===== HERO SECTION ===== */}
-      <section className="relative pt-20 pb-14 sm:pt-24 sm:pb-20 px-4">
-        <div className="absolute top-10 left-1/4 w-100 h-100 rounded-full blur-[120px]" style={{ background: 'rgba(194,120,92,0.04)' }} />
+      <section className="relative pt-20 pb-6 sm:pt-28 sm:pb-20 px-4">
+        <div className="hidden sm:block absolute top-10 left-1/2 -translate-x-1/2 rounded-full blur-[120px] w-48 h-48 sm:w-72 sm:h-72 lg:w-125 lg:h-125" style={{ background: 'rgba(194,120,92,0.04)' }} />
 
-        <div className="max-w-7xl mx-auto relative z-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div className="max-w-7xl mx-auto relative z-10 grid gap-6 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 animate-fade-in" style={{ background: 'rgba(194,120,92,0.06)', border: '1px solid rgba(194,120,92,0.12)' }}>
               <HiOutlineSignal className="w-3.5 h-3.5 text-primary" />
               <span className="text-xs font-medium" style={{ color: 'var(--color-primary-light)' }}>Educational Content Broadcasting</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 animate-fade-in">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-3 sm:mb-4 animate-fade-in">
               Seamless Content Delivery{' '}
               <span className="gradient-text">From Teachers</span>{' '}
               <span style={{ color: 'var(--text-primary)' }}>To Students</span>
             </h1>
 
-            <p className="text-lg sm:text-xl max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed animate-fade-in" style={{ color: 'var(--text-secondary)', animationDelay: '100ms' }}>
+            <p className="text-sm sm:text-lg max-w-xl mx-auto lg:mx-0 mb-5 sm:mb-8 leading-relaxed animate-fade-in" style={{ color: 'var(--text-secondary)', animationDelay: '100ms' }}>
               ContentCast empowers educational institutions with a streamlined workflow — teachers upload, principals approve, students view live broadcasts in real-time.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: '200ms' }}>
-              <Link href={ROUTES.LOGIN} className="btn-primary px-8 py-3.5 text-base flex items-center justify-center gap-2 group">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <Link href={ROUTES.LOGIN} className="btn-primary w-full sm:w-auto px-4 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base flex items-center justify-center gap-2 group">
                 Get Started <HiOutlineArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link href="/live/teacher-1" className="btn-secondary px-8 py-3.5 text-base flex items-center justify-center gap-2">
+              <Link href="/live/teacher-1" className="btn-secondary w-full sm:w-auto px-4 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base flex items-center justify-center gap-2">
                 <HiOutlineSignal className="w-4 h-4" /> View Live Demo
               </Link>
             </div>
 
-            <div className="mt-16 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 animate-fade-in" style={{ animationDelay: '400ms' }}>
+            <div className="mt-6 sm:mt-12 grid grid-cols-3 gap-2 sm:gap-4 max-w-xs sm:max-w-lg mx-auto lg:mx-0 animate-fade-in" style={{ animationDelay: '400ms' }}>
               {[
                 { num: '3', label: 'User Roles' },
                 { num: '\u221E', label: 'Content Uploads' },
@@ -226,13 +235,15 @@ export default function HomePage() {
           </div>
 
           <div className="flex justify-center lg:justify-end animate-fade-in" style={{ animationDelay: '250ms' }}>
-            <MacBookFrame />
+            <div className="w-full max-w-xs sm:max-w-md">
+              <MacBookFrame />
+            </div>
           </div>
         </div>
       </section>
 
       {/* ===== STUDENT DEMO FRAME ===== */}
-      <section className="py-16 px-4 relative">
+      <section className="py-6 sm:py-16 px-4 relative">
         <div className="max-w-5xl mx-auto">
           <div className="glass-card overflow-hidden" style={{ borderRadius: '20px' }}>
             {/* MacBook Window Chrome */}
@@ -244,7 +255,7 @@ export default function HomePage() {
             </div>
             {/* Content */}
             <div className="p-2 sm:p-3">
-              <div className="relative aspect-video min-h-65 overflow-hidden rounded-2xl">
+              <div className="relative aspect-video overflow-hidden rounded-xl sm:rounded-2xl max-h-[50vh] sm:max-h-[60vh]">
                 <Image
                   src="/mock/student-demo.png"
                   alt="Indian classroom with students viewing broadcast content"
@@ -254,7 +265,7 @@ export default function HomePage() {
                   priority
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 flex items-center justify-between">
                   <div className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold text-white" style={{ background: 'rgba(199,92,92,0.85)', backdropFilter: 'blur(8px)' }}>
                     <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
@@ -272,15 +283,15 @@ export default function HomePage() {
       </section>
 
       {/* ===== FEATURES SECTION ===== */}
-      <section id="features" className="py-20 px-4">
+      <section id="features" className="py-8 sm:py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
+          <div className="text-center mb-8 sm:mb-14">
             <span className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--color-primary-light)' }}>Features</span>
-            <h2 className="text-3xl sm:text-4xl font-bold mt-3 mb-4">Everything You Need for <span className="gradient-text">Broadcasting</span></h2>
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mt-3 mb-3 sm:mb-4">Everything You Need for <span className="gradient-text">Broadcasting</span></h2>
             <p style={{ color: 'var(--text-secondary)' }} className="max-w-xl mx-auto">A complete platform for efficient, organized educational content delivery.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[
               { icon: HiOutlineCloudArrowUp, title: 'Easy Upload', desc: 'Drag-and-drop file uploads with preview, supporting JPG, PNG, and GIF formats up to 10MB.', color: '#c2785c' },
               { icon: HiOutlineShieldCheck, title: 'Approval Workflow', desc: 'Principals review, approve, or reject content with mandatory reasons before it goes live.', color: '#6dae7f' },
@@ -289,7 +300,7 @@ export default function HomePage() {
               { icon: HiOutlineChartBar, title: 'Dashboard Analytics', desc: 'Visual stat cards showing total, pending, approved, and rejected content at a glance.', color: '#c75c5c' },
               { icon: HiOutlineGlobeAlt, title: 'Public Access', desc: 'No login required for students — just share the live link and they can view active broadcasts.', color: '#6b8fb5' },
             ].map((f, i) => (
-              <div key={i} className="glass-card glass-card-hover p-6 group" style={{ animationDelay: `${i * 80}ms` }}>
+              <div key={i} className="glass-card glass-card-hover p-4 sm:p-6 group" style={{ animationDelay: `${i * 80}ms` }}>
                 <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300" style={{ background: `${f.color}10`, border: `1px solid ${f.color}18` }}>
                   <f.icon className="w-5 h-5" style={{ color: f.color }} />
                 </div>
@@ -302,22 +313,22 @@ export default function HomePage() {
       </section>
 
       {/* ===== HOW IT WORKS ===== */}
-      <section id="how-it-works" className="py-20 px-4">
+      <section id="how-it-works" className="py-8 sm:py-20 px-4">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
+          <div className="text-center mb-8 sm:mb-14">
             <span className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--color-primary-light)' }}>Workflow</span>
-            <h2 className="text-3xl sm:text-4xl font-bold mt-3 mb-4">How It <span className="gradient-text">Works</span></h2>
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mt-3 mb-3 sm:mb-4">How It <span className="gradient-text">Works</span></h2>
             <p style={{ color: 'var(--text-secondary)' }} className="max-w-xl mx-auto">Three simple steps from content creation to live broadcasting.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
             {[
               { step: '01', title: 'Teacher Uploads', desc: 'Teachers create content with title, subject, file, description, and schedule it with start/end times.', icon: HiOutlineCloudArrowUp, color: '#c2785c' },
               { step: '02', title: 'Principal Reviews', desc: 'Principals see pending content, preview it, and approve or reject with a mandatory reason.', icon: HiOutlineShieldCheck, color: '#6dae7f' },
               { step: '03', title: 'Students Watch Live', desc: 'Approved content broadcasts on a public page with auto-rotation — no login needed for students.', icon: HiOutlineSignal, color: '#d4a853' },
             ].map((s, i) => (
               <div key={i} className="relative text-center">
-                <div className="text-5xl font-black mb-4" style={{ color: 'var(--bg-surface-lighter)', opacity: 0.6 }}>{s.step}</div>
+                <div className="text-4xl sm:text-5xl font-black mb-3 sm:mb-4" style={{ color: 'var(--bg-surface-lighter)', opacity: 0.6 }}>{s.step}</div>
                 <div className="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center animate-float" style={{ background: `${s.color}10`, border: `1px solid ${s.color}18`, animationDelay: `${i * 0.5}s` }}>
                   <s.icon className="w-7 h-7" style={{ color: s.color }} />
                 </div>
@@ -331,23 +342,23 @@ export default function HomePage() {
       </section>
 
       {/* ===== ROLE CARDS ===== */}
-      <section id="roles" className="py-20 px-4">
+      <section id="roles" className="py-8 sm:py-20 px-4">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
+          <div className="text-center mb-8 sm:mb-14">
             <span className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--color-primary-light)' }}>Access</span>
-            <h2 className="text-3xl sm:text-4xl font-bold mt-3 mb-4">Choose Your <span className="gradient-text">Role</span></h2>
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mt-3 mb-3 sm:mb-4">Choose Your <span className="gradient-text">Role</span></h2>
             <p style={{ color: 'var(--text-secondary)' }} className="max-w-xl mx-auto">Sign in as a Teacher to upload content, or as a Principal to manage approvals.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             {/* Teacher */}
-            <Link href="/login?role=teacher" className="glass-card glass-card-hover p-7 text-center group block">
-              <div className="w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center group-hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, #c2785c, #a0604a)' }}>
-                <HiOutlineAcademicCap className="w-8 h-8 text-white" />
+            <Link href="/login?role=teacher" className="glass-card glass-card-hover p-4 sm:p-7 text-center group block">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl mx-auto mb-3 sm:mb-5 flex items-center justify-center group-hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, #c2785c, #a0604a)' }}>
+                <HiOutlineAcademicCap className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Teacher</h3>
-              <p className="text-sm mb-5" style={{ color: 'var(--text-secondary)' }}>Upload content, set schedules, track approval status.</p>
-              <div className="rounded-xl p-3 mb-4 text-left space-y-2" style={{ background: 'var(--bg-surface-light)' }}>
+              <h3 className="text-base sm:text-lg font-bold mb-1.5 sm:mb-2" style={{ color: 'var(--text-primary)' }}>Teacher</h3>
+              <p className="text-sm mb-3 sm:mb-5" style={{ color: 'var(--text-secondary)' }}>Upload content, set schedules, track approval status.</p>
+              <div className="rounded-xl p-2.5 sm:p-3 mb-3 sm:mb-4 text-left space-y-2" style={{ background: 'var(--bg-surface-light)' }}>
                 {['Upload and schedule content', 'Track approval status', 'View dashboard analytics', 'Share live broadcast link'].map((t) => (
                   <div key={t} className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-secondary)' }}><HiOutlineCheckBadge className="w-3.5 h-3.5 shrink-0" style={{ color: 'var(--color-primary)' }} />{t}</div>
                 ))}
@@ -355,19 +366,19 @@ export default function HomePage() {
               <div className="rounded-lg p-2.5 mb-4" style={{ background: 'var(--bg-surface)' }}>
                 <p className="text-[11px]" style={{ color: 'var(--text-muted)' }}>Demo: <span style={{ color: 'var(--text-secondary)' }}>teacher@school.com / teacher123</span></p>
               </div>
-              <span className="btn-primary py-2.5 px-6 text-sm inline-flex items-center gap-2">
+              <span className="btn-primary w-full sm:w-auto py-2.5 px-4 text-sm inline-flex items-center justify-center gap-2">
                 Sign In as Teacher <HiOutlineArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
 
             {/* Principal */}
-            <Link href="/login?role=principal" className="glass-card glass-card-hover p-7 text-center group block">
-              <div className="w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center group-hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, #6dae7f, #4e9460)' }}>
-                <HiOutlineShieldCheck className="w-8 h-8 text-white" />
+            <Link href="/login?role=principal" className="glass-card glass-card-hover p-4 sm:p-7 text-center group block">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl mx-auto mb-3 sm:mb-5 flex items-center justify-center group-hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, #6dae7f, #4e9460)' }}>
+                <HiOutlineShieldCheck className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Principal</h3>
-              <p className="text-sm mb-5" style={{ color: 'var(--text-secondary)' }}>Review, approve or reject content with reasons.</p>
-              <div className="rounded-xl p-3 mb-4 text-left space-y-2" style={{ background: 'var(--bg-surface-light)' }}>
+              <h3 className="text-base sm:text-lg font-bold mb-1.5 sm:mb-2" style={{ color: 'var(--text-primary)' }}>Principal</h3>
+              <p className="text-sm mb-3 sm:mb-5" style={{ color: 'var(--text-secondary)' }}>Review, approve or reject content with reasons.</p>
+              <div className="rounded-xl p-2.5 sm:p-3 mb-3 sm:mb-4 text-left space-y-2" style={{ background: 'var(--bg-surface-light)' }}>
                 {['View all submitted content', 'Approve or reject with reason', 'Filter by status and search', 'Institutional analytics'].map((t) => (
                   <div key={t} className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-secondary)' }}><HiOutlineCheckBadge className="w-3.5 h-3.5 shrink-0" style={{ color: '#6dae7f' }} />{t}</div>
                 ))}
@@ -375,19 +386,19 @@ export default function HomePage() {
               <div className="rounded-lg p-2.5 mb-4" style={{ background: 'var(--bg-surface)' }}>
                 <p className="text-[11px]" style={{ color: 'var(--text-muted)' }}>Demo: <span style={{ color: 'var(--text-secondary)' }}>principal@school.com / principal123</span></p>
               </div>
-              <span className="inline-flex items-center gap-2 py-2.5 px-6 text-sm font-bold text-white rounded-xl transition-all" style={{ background: 'linear-gradient(135deg, #6dae7f, #4e9460)', boxShadow: '0 3px 10px rgba(109,174,127,0.2)' }}>
+              <span className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-2.5 px-4 text-sm font-bold text-white rounded-xl transition-all" style={{ background: 'linear-gradient(135deg, #6dae7f, #4e9460)', boxShadow: '0 3px 10px rgba(109,174,127,0.2)' }}>
                 Sign In as Principal <HiOutlineArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
 
             {/* Student */}
-            <Link href="/live/teacher-1" className="glass-card glass-card-hover p-7 text-center group block">
-              <div className="w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center group-hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, #d4a853, #b88e3a)' }}>
-                <HiOutlineUserGroup className="w-8 h-8 text-white" />
+            <Link href="/live/teacher-1" className="glass-card glass-card-hover p-4 sm:p-7 text-center group block">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl mx-auto mb-3 sm:mb-5 flex items-center justify-center group-hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, #d4a853, #b88e3a)' }}>
+                <HiOutlineUserGroup className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Student</h3>
-              <p className="text-sm mb-5" style={{ color: 'var(--text-secondary)' }}>View live broadcast content — no login required.</p>
-              <div className="rounded-xl p-3 mb-4 text-left space-y-2" style={{ background: 'var(--bg-surface-light)' }}>
+              <h3 className="text-base sm:text-lg font-bold mb-1.5 sm:mb-2" style={{ color: 'var(--text-primary)' }}>Student</h3>
+              <p className="text-sm mb-3 sm:mb-5" style={{ color: 'var(--text-secondary)' }}>View live broadcast content — no login required.</p>
+              <div className="rounded-xl p-2.5 sm:p-3 mb-3 sm:mb-4 text-left space-y-2" style={{ background: 'var(--bg-surface-light)' }}>
                 {['View active broadcasts', 'Auto-refreshing content', 'No login required', 'Content auto-rotation'].map((t) => (
                   <div key={t} className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-secondary)' }}><HiOutlineCheckBadge className="w-3.5 h-3.5 shrink-0" style={{ color: '#d4a853' }} />{t}</div>
                 ))}
@@ -395,7 +406,7 @@ export default function HomePage() {
               <div className="rounded-lg p-2.5 mb-4" style={{ background: 'var(--bg-surface)' }}>
                 <p className="text-[11px]" style={{ color: 'var(--text-muted)' }}>Public access via <span style={{ color: 'var(--text-secondary)' }}>/live/:teacherId</span></p>
               </div>
-              <span className="inline-flex items-center gap-2 py-2.5 px-6 text-sm font-bold text-white rounded-xl transition-all" style={{ background: 'linear-gradient(135deg, #d4a853, #b88e3a)', boxShadow: '0 3px 10px rgba(212,168,83,0.2)' }}>
+              <span className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-2.5 px-4 text-sm font-bold text-white rounded-xl transition-all" style={{ background: 'linear-gradient(135deg, #d4a853, #b88e3a)', boxShadow: '0 3px 10px rgba(212,168,83,0.2)' }}>
                 View Live Content <HiOutlineArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
@@ -404,8 +415,8 @@ export default function HomePage() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer style={{ borderTop: '1px solid var(--border-color)' }} className="py-8 px-4">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <footer style={{ borderTop: '1px solid var(--border-color)' }} className="py-5 sm:py-8 px-4">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-white/90 flex items-center justify-center" style={{ border: '1px solid var(--border-color)' }}>
               <EduStreamMark size={18} />

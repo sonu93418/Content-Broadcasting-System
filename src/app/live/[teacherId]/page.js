@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useLiveContent } from '@/hooks/useContent';
 import contentService from '@/services/content.service';
@@ -190,11 +191,11 @@ export default function LivePage() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ background: 'var(--bg-body)' }}>
+    <div className="min-h-screen relative" style={{ background: 'var(--bg-body)' }}>
       {/* Background ambient effects */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]" />
+        <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-90 h-90 md:w-125 md:h-125 bg-primary/5 rounded-full blur-[150px]" />
+        <div className="hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 w-90 h-90 md:w-125 md:h-125 bg-secondary/5 rounded-full blur-[150px]" />
       </div>
 
       {/* ===== HEADER ===== */}
@@ -240,7 +241,7 @@ export default function LivePage() {
 
         {data.length > 1 && (
           <div className="h-0.5" style={{ background: 'var(--bg-surface-lighter)' }}>
-            <div className="h-full bg-gradient-to-r from-primary via-accent to-secondary transition-all duration-100 ease-linear" style={{ width: `${progress}%` }} />
+            <div className="h-full bg-linear-to-r from-primary via-accent to-secondary transition-all duration-100 ease-linear" style={{ width: `${progress}%` }} />
           </div>
         )}
       </header>
@@ -250,10 +251,14 @@ export default function LivePage() {
         <div className="relative bg-black">
           <div className="relative w-full flex items-center justify-center overflow-hidden cursor-pointer" style={{ minHeight: '50vh', maxHeight: '70vh' }} onClick={() => setIsPaused((p) => !p)}>
             {currentContent?.fileUrl && (
-              <img src={currentContent.fileUrl} alt="" className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-20 scale-110" />
+              <div className="absolute inset-0 z-0">
+                <Image src={currentContent.fileUrl} alt="" fill className="object-cover blur-2xl opacity-20 scale-110" unoptimized />
+              </div>
             )}
             {currentContent?.fileUrl && (
-              <img key={currentContent.id} src={currentContent.fileUrl} alt={currentContent.title} className={`relative max-w-full max-h-[70vh] object-contain z-10 transition-opacity duration-500 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`} onLoad={() => setImgLoaded(true)} />
+              <div className={`relative w-full max-w-full max-h-[70vh] z-10 transition-opacity duration-500 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}>
+                <Image src={currentContent.fileUrl} alt={currentContent.title} width={1200} height={800} className="object-contain" unoptimized onLoadingComplete={() => setImgLoaded(true)} />
+              </div>
             )}
             {!imgLoaded && (
               <div className="absolute inset-0 flex items-center justify-center z-5">
@@ -331,7 +336,7 @@ export default function LivePage() {
                 {data.map((item, i) => (
                   <button key={item.id} onClick={() => goTo(i)} className={`flex items-center gap-3 p-3 rounded-xl text-left transition-all duration-200 ${i === currentIndex ? 'bg-primary/10 border border-primary/25 shadow-lg shadow-primary/5' : 'border border-transparent'}`} style={i !== currentIndex ? { background: 'var(--bg-surface)' } : undefined}>
                     <div className="relative w-16 h-12 rounded-lg overflow-hidden shrink-0" style={{ background: 'var(--bg-surface-lighter)' }}>
-                      <img src={item.fileUrl} alt={item.title} className="w-full h-full object-cover" />
+                      <Image src={item.fileUrl} alt={item.title} fill className="object-cover" unoptimized />
                       {i === currentIndex && (<div className="absolute inset-0 bg-primary/20 flex items-center justify-center"><span className="w-2 h-2 rounded-full bg-white animate-pulse" /></div>)}
                     </div>
                     <div className="min-w-0 flex-1">
@@ -351,7 +356,7 @@ export default function LivePage() {
                 {scheduled.map((item) => (
                   <div key={item.id} className="flex items-center gap-3 p-3 rounded-xl" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-color)' }}>
                     <div className="relative w-16 h-12 rounded-lg overflow-hidden shrink-0" style={{ background: 'var(--bg-surface-lighter)' }}>
-                      <img src={item.fileUrl} alt={item.title} className="w-full h-full object-cover" />
+                      <Image src={item.fileUrl} alt={item.title} fill className="object-cover" unoptimized />
                       <div className="absolute inset-0 bg-black/40 flex items-center justify-center"><HiOutlineClock className="w-4 h-4 text-white" /></div>
                     </div>
                     <div className="min-w-0 flex-1">
