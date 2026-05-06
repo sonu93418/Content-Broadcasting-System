@@ -182,8 +182,8 @@ export default function HomePage() {
       </nav>
 
       {/* ===== HERO SECTION ===== */}
-      <section className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 px-4">
-        <div className="absolute top-16 left-1/4 w-100 h-100 rounded-full blur-[120px]" style={{ background: 'rgba(194,120,92,0.04)' }} />
+      <section className="relative pt-20 pb-14 sm:pt-24 sm:pb-20 px-4">
+        <div className="absolute top-10 left-1/4 w-100 h-100 rounded-full blur-[120px]" style={{ background: 'rgba(194,120,92,0.04)' }} />
 
         <div className="max-w-7xl mx-auto relative z-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="text-center lg:text-left">
