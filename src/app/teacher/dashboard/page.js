@@ -20,6 +20,7 @@ import {
   HiOutlineArrowTopRightOnSquare,
 } from 'react-icons/hi2';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ROUTES } from '@/utils/constants';
 
 export default function TeacherDashboard() {
